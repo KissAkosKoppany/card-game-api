@@ -1,20 +1,15 @@
 const express = require('express')
-const passport = require('passport')
+const passport = require('passport');
+const { redirectAfterLogin, logoutUser } = require('./auth.controller')
 
 const authRouter = express.Router();
 
 authRouter.get('/auth/google', passport.authenticate('google', {
-    scope: [ 'profile' ]
+    scope: ['profile']
 }));
 
-authRouter.get('/auth/google/redirect', passport.authenticate('google', {
-    failureRedirect: "/faliure",
-    successRedirect: '/',
-    session: false
-}), (req, res) => {
-    console.log('google auth yesss')
-})
+authRouter.get('/auth/google/redirect', passport.authenticate('google'), redirectAfterLogin)
 
-authRouter.get('/logout', (req, res) => {})
+authRouter.get('/auth/logout', logoutUser)
 
 module.exports = authRouter;
