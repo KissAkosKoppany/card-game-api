@@ -125,11 +125,29 @@ async function updateUserAfterBattleEnd(battle, userId) {
     }
 }
 
+async function updateUsername(userId, newUsername) {
+    await users.updateOne({id: userId}, {
+        username: newUsername
+    }, {
+        upsert: true
+    })
+}
+
+async function updateProfileImage(userId, newImage) {
+    await users.updateOne({id: userId}, {
+        image: newImage
+    }, {
+        upsert: true
+    })
+}
+
 module.exports = {
     getUserInfo,
     getAllUsers,
     updateUserRequests,
     acceptFriendRequest,
     rejectFriendRequest,
-    updateUserAfterBattleEnd
+    updateUserAfterBattleEnd,
+    updateUsername,
+    updateProfileImage
 }

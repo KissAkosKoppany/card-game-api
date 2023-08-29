@@ -31,16 +31,6 @@ app.use(cors());
 // app.use(morgan('combined'))
 app.use(express.json());
 
-// app.options("/parse", cors(), (req, res) => {
-//     res.sendStatus(204);
-// });
-
-// app.use(express.static(path.join(__dirname, '..', 'public')))
-
-app.get('/', (req, res) => {
-    console.log('what is going on')
-    res.status(200).json("what is going on")
-})
 app.use(authRouter);
 app.use(userRouter);
 app.use(cardsRouter);

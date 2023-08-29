@@ -1,4 +1,4 @@
-const { getUserInfo, getAllUsers, updateUserRequests, acceptFriendRequest, updateUserAfterBattleEnd, rejectFriendRequest } = require('../../models/users.model')
+const { getUserInfo, getAllUsers, updateUserRequests, acceptFriendRequest, updateUsername, updateProfileImage, updateUserAfterBattleEnd, rejectFriendRequest } = require('../../models/users.model')
 
 async function httpLoadUserInfo(req, res) {
     if(req.user) {
@@ -50,6 +50,20 @@ async function httpUpdateProfileAfterBattle(req, res) {
     return res.status(201).json(battleData)
 }
 
+async function httpUpdateUsername(req, res) {
+    const id = req.params.id;
+    const newUsername = req.body;
+    await updateUsername(id, newUsername)
+    return res.status(201).json(newUsername)
+}
+
+async function httpUpdateProfileImage(req, res) {
+    const id = req.params.id;
+    const newImage = req.body;
+    await updateProfileImage(id, newImage)
+    res.status(201).json(newImage)
+}
+
 module.exports = {
     httpLoadUserInfo,
     checkAdmin,
@@ -58,5 +72,7 @@ module.exports = {
     httpAcceptFriendRequest,
     httpRejectFriendRequest,
     httpGetPlayerInfo,
-    httpUpdateProfileAfterBattle
+    httpUpdateProfileAfterBattle,
+    httpUpdateUsername,
+    httpUpdateProfileImage
 }
