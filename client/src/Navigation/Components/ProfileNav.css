@@ -1,0 +1,100 @@
+.profile-nav-dropdown {
+    position: absolute;
+    right: calc((-10rem - var(--spacer-600)) / 2);
+    top: var(--spacer-500);
+    width: 10rem;
+    background-color: rgba(var(--clr-blue-dark), .8);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 0 var(--spacer-400);
+    border-radius: 3px;
+}
+
+.nav-group-container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin: 0;
+    padding: var(--spacer-200) 0;
+    border-bottom: 1px solid rgba(var(--clr-bg-highlight), .7);
+}
+
+.nav-group-container:last-child {
+    border-bottom: none;
+}
+
+.profile-nav-link {
+    list-style: none;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.profile-nav {
+    list-style: none;
+    padding: 2px;
+}
+
+.profile-nav-link:hover {
+    color: rgba(var(--clr-bg-highlight));
+}
+
+.profile-nav-link:active {
+    color: rgba(var(--clr-bg-highlight), .7);
+}
+
+.profile-nav-user-name {
+    color: rgba(var(--clr-bg-highlight));
+    text-transform: uppercase;
+}
+
+.profile-nav-decor {
+    background-color: rgba(var(--clr-bg-secondary));
+    position: absolute;
+}
+
+.profile-nav-decor.line.top {
+    width: 50%;
+    height: 2px;
+    left: 27px;
+    top: 0;  
+}
+
+.profile-nav-decor.line.left {
+    width: 3px;
+    height: 50%;
+    left: 0;
+    top: 27px;
+}
+
+.profile-nav-decor.line.bottom {
+    width: 50%;
+    height: 3px;
+    bottom: 0;
+    right: 27px;
+}
+
+.profile-nav-decor.line.right {
+    width: 2px;
+    height: 50%;
+    right: 0;
+    bottom: 27px;
+}
+
+.profile-nav-decor.triangle {
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    width: 23px;
+    height: 23px;
+}
+
+.profile-nav-decor.triangle.top {
+    left: 0;
+    top: 0;
+}
+
+.profile-nav-decor.triangle.bottom {
+    right: 0;
+    bottom: 0;  
+    rotate: 180deg;
+}

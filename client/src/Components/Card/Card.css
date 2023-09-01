@@ -1,0 +1,1023 @@
+.card-container {
+    height: 15rem;
+    aspect-ratio: 10/16;
+    position: relative;
+    margin: var(--spacer-500);
+    /* background-color: black; */
+    border-radius: 1px;
+    z-index: 20;
+    opacity: 1;
+    transition: opacity 2s ease-in-out 1s;
+}
+
+.card-container.battle {
+    scale: 1;
+}
+
+.card-container.statList {
+    scale: 1.5;
+    margin: var(--spacer-900) var(--spacer-800);
+}
+
+.card-container.select {
+    scale: 1.3;
+    margin: var(--spacer-900) var(--spacer-700);
+}
+
+.card-container.statList.modal {
+    scale: 2;
+}
+
+.card-container.stagePreview {
+    scale: .5;
+    position: absolute;
+    margin: 0;
+}
+
+.card-container.stagePreview.one {
+    right: -20px;
+    bottom: -40px;
+}
+
+.card-container.stagePreview.three {
+    left: -20px;
+    bottom: -40px;
+}
+
+.card-container.stagePreview.two {
+    left: 80px;
+    bottom: -40px;
+}
+
+.card-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(var(--clr-blue-dark));
+}
+
+
+
+.card-triangle-top,
+.card-triangle-bottom {
+    position: absolute;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.card-triangle-top {
+    background-image: var(--gradient-triangle);
+    width: 90%;
+    height: 40%;
+}
+
+.card-triangle-bottom {
+    background-color: rgba(var(--clr-blue-dark));
+    width: 84%;
+    height: 32%;
+}
+
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotation {
+    0% { --gradient-angle: 0deg;}
+    100% { --gradient-angle: 360deg;}
+}
+
+.card-container::before,
+.card-container::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-bg-red)),
+        rgba(var(--clr-blue-dark))
+    );
+    animation: rotation 4s linear infinite;
+}
+
+.card-container::after {
+    filter: blur(5px);
+}
+
+.img-container {
+    width: 90%;
+    height: 55%;
+    position: absolute;
+    top: 5px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+    clip-path: var(--polygon-img);
+    transition: all 500ms linear;
+}
+
+.img-container.opponent {
+    height: 64%;
+}
+
+.card-img-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(var(--clr-bg-red), 0.5); */
+}
+
+.card-img {
+    width: 95%;
+    height: 95%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    z-index: 10;
+    clip-path: var(--polygon-img);
+    /* z-index: -10 i dont know why */
+}
+
+.card-side-decor {
+    width: 21px;
+    height: 80px;
+    position: absolute;
+    top: 13%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-side-decor.left {
+    left: 0;
+}
+
+.card-side-decor.right {
+    right: 0;
+}
+
+.card-side-decor.opponent {
+    top: 18%;
+}
+
+.card-decor-line {
+    width: 13px;
+    height: 2px;
+    rotate: 45deg;
+    margin-bottom: 6px;
+    border: 2px solid;
+}
+
+.card-side-decor.right .card-decor-line {
+    rotate: -45deg;
+}
+
+/* Card StatList Style */
+
+.card-stat-wrapper {
+    width: 90%;
+    height: 38%;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.card-stat-container {
+    text-align: center;
+    width: 100%;
+    position: relative;
+    background-image: var(--card-stat-gradient);
+    margin-bottom: 6px;
+}
+
+.card-stat-container-left {
+    position: absolute;
+    width: 47%;
+    height: 75%;
+    left: 0;
+}
+
+.card-stat-container-right {
+    position: absolute;
+    width: 47%;
+    height: 75%;
+    right: 0;
+}
+
+.card-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px 4px;
+}
+
+.card-stat p,
+.card-name p {
+    margin: 0;
+}
+
+.card-stat p {
+    font-size: var(--font-size-100);
+}
+
+.card-name p {
+    font-size: var(--font-size-100);
+    padding: 3px 0;
+    font-family: var(--font-bold);
+}
+
+.card-name.opponent {
+    bottom: 47%;
+    position: absolute;
+}
+
+.card-name .card-stat-decor {
+    clip-path: var(--polygon-card-name);
+}
+
+.card-stat-decor {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    clip-path: var(--polygon-card-stat);
+}
+
+.card-stat-decor.left {
+    left: 0;
+}
+
+.card-stat-decor.right {
+    right: 0;
+    transform: scaleX(-1) scaleY(-1);
+}
+
+/* Card StatList Style END */
+
+/* Card Battle Style */
+
+.card-battle-icons-wrapper {
+    width: 100%;
+    height: 43%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.card-battle-icon-container {
+    width: 25%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: rgba(var(--clr-bg-main), .7);
+    clip-path: var(--polygon-octagon-bg);
+}
+
+
+.card-battle-icon-container:hover {
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.card-battle-icon-container:hover .card-battle-icon-border {
+    width: 85%;
+    height: 85%;
+}
+
+.card-battle-icon-border {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    clip-path: var(--polygon-octagon-border);
+}
+
+.card-battle-icon {
+    font-size: var(--font-size-300);
+}
+
+.card-battle-stats-wrapper {
+    width: 100%;
+    height: 35%;
+    /* background-color: aqua; */
+    position: relative;
+}
+
+.card-battle-stats-wrapper.opponent {
+    position: absolute;
+    bottom: 0;
+}
+
+.card-battle-attack,
+.card-battle-hp {
+    position: absolute;
+    z-index: 10;
+    margin: auto;
+    top: 2px;
+}
+
+.card-battle-hp-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    font-size: var(--font-size-100);
+}
+
+.card-battle-hp-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.card-battle-hp-bar-container {
+    width: 78%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-battle-hp-border {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: aqua;
+    z-index: 2;
+    clip-path: var(--polygon-hp-border);
+}
+
+.card-battle-hp-border.right {
+    transform: scaleX(-1);
+}
+
+.card-battle-hp-bar {
+    width: 89%;
+    height: 99%;
+    position: absolute;
+}
+
+.hp-bar-indicator {
+    height: 100%;
+    opacity: .5;
+    transition: all 1s ease-in-out;
+}
+
+.card-battle-attack-container {
+    position: relative;
+    top: -3px;
+    width: 100%;
+    font-size: var(--font-size-100);
+    display: flex;
+    align-items: center;
+    height: 50%;
+}
+
+
+.card-battle-attack-bar-container {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    background-image: var(--card-stat-gradient);
+}
+
+.card-battle-attack-border {
+    width: 100%;
+    height: 100%;
+    clip-path: var(--polygon-hp-border);
+}
+
+.card-battle-attack-border.right {
+    transform: scaleX(-1);
+}
+
+/* Card Battle Style END */
+
+/* Card Action cover style */
+
+.card-action-cover {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--clr-bg-main), .1);
+    position: absolute;
+    z-index: 0;
+    transition: background-color 600ms ease-in-out, z-index 1s;
+}
+
+.card-action-cover.onDamageReceived,
+.card-action-cover.onHealReceived {
+    background-color: rgba(var(--clr-bg-main), .3);
+    z-index: 9999;
+    transition: background-color 600ms ease-in-out, z-index 0s;
+}
+
+.card-action-cover.onStun {
+    z-index: 9999;
+}
+
+.card-action-cover-bg {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--clr-bg-main), .8);
+    clip-path: var(--polygon-card-cover);
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+.card-action-cover-bg.onStun {
+    opacity: 1;
+}
+
+.card-action-container {
+    width: 0;
+    height: 5%;
+    background-color: rgba(var(--clr-bg-main), .8);
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    clip-path: var(--polygon-octagon-bg);
+    transition: height 500ms ease-in-out, width 500ms ease-in-out 500ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-action-container.onStun {
+    width: 55%;
+    height: 27%;
+    transition: height 500ms ease-in-out 500ms, width 500ms ease-in-out;
+}
+
+.card-action-container.onDamageReceived,
+.card-action-container.onHealReceived
+ {
+    width: 90%;
+    height: 27%;
+    transition: height 500ms ease-in-out 350ms, width 500ms ease-in-out;
+}
+
+.card-action-icon.onStun.onDamageReceived,
+.card-action-icon.onStun.onHealReceived
+{
+    opacity: 0;
+    transition: opacity 100ms ease-in-out 0s;
+}
+
+.card-action-text {
+    font-size: var(--font-size-300);
+    opacity: 0;
+    transition: opacity 100ms ease-in-out;
+    margin: 0;
+    display: flex;
+    font-weight: 900;
+}
+
+.card-action-text.critAttack {
+    color: rgb(var(--clr-crit-attack));
+}
+
+.card-action-text.normalAttack.ad {
+    color: rgb(var(--clr-physical));
+}
+
+.card-action-text.normalAttack.ap {
+    color: rgb(var(--clr-magic));
+}
+
+.card-action-text.onDamageReceived,
+.card-action-text.onHealReceived {
+    opacity: 1;
+    transition: opacity 100ms ease-in-out 800ms;
+}
+
+.card-action-text.onHealReceived {
+    color: rgb(var(--clr-heal));
+}
+
+.card-action-container-border {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    inset: 0;
+    margin: auto;
+    clip-path: var(--polygon-octagon-border);
+}
+
+.card-action-icon {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    font-size: var(--font-size-500);
+    opacity: 0;
+    transition: opacity 100ms ease-in-out 0s;
+}
+
+.card-action-icon.onStun {
+    opacity: 1;
+    transition: opacity 100ms ease-in-out 1s;
+}
+
+/* Card Action cover style END */
+
+/* Card Battle Animations */
+
+@keyframes atk-animation {
+    0% { transform: translateY(0px);}
+    60% { transform: translateY(20px);}
+    70% { transform: translateY(-50px);}
+    100% { transform: translateY(0px);}
+}
+
+.card-container.down.atk-animation {
+    animation: atk-animation 700ms ease-in;
+}
+
+@keyframes atk-animation-opponent {
+    0% { transform: translateY(0px);}
+    60% { transform: translateY(-20px);}
+    70% { transform: translateY(50px);}
+    100% { transform: translateY(0px);}
+}
+
+.card-container.up.atk-animation {
+    animation: atk-animation-opponent 700ms ease-in;
+}
+
+@keyframes damage-taken {
+    0% {transform: scale(1) translateY(0);}
+    30% {transform: scale(.9) translateY(30px);}
+    100% {transform: scale(1) translateY(0);}
+}
+
+.card-container.dmg-take {
+    animation: damage-taken 500ms ease-in-out;
+}
+
+.img-container.skill-animation {
+    transform: scaleX(1.5) scaleY(1.2);
+    transition: all 500ms linear;
+}
+
+.card-skill-video {
+    opacity: 0;
+    transition: all 500ms linear;
+}
+
+.card-skill-video.skill-animation {
+    opacity: 1;
+    transition: all 500ms linear;
+}
+
+.card-container.card-death {
+    opacity: 0;
+}
+
+/* Card Battle Animations END */
+
+/* Card DoT effects */
+
+.dot-effect-container {
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    font-size: var(--font-size-700);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(var(--clr-bg-main), .7);
+}
+
+.dot-effect-poison {
+    color: rgb(var(--clr-poison));
+}
+
+.dot-effect-bleed {
+    color: rgb(var(--clr-bleed));
+}
+
+.dot-effect-burn {
+    color: rgb(var(--clr-burn));
+}
+
+/* Card DoT effects END */
+
+/* Card effect icons bar */
+
+.effect-icons-container {
+    /* background-color: red; */
+    color: rgb(214, 214, 214);
+    position: absolute;
+    width: 100%;
+    top: -20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.effect-icon {
+    background-color: rgb(14, 14, 14);
+    font-size: var(--font-size-200);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 25px;
+    aspect-ratio: 1/1;
+    position: relative;
+    margin-left: 5px;
+}
+
+.effect-sub-icon {
+    position: absolute;
+    font-size: var(--font-size-200);
+    top: -5px;
+    left: -5px;
+}
+
+.effect-sub-icon.down {
+    transform: scaleY(-1);
+}
+
+.icon-poison {
+    color: rgb(var(--clr-poison));
+}
+
+.icon-crit {
+    color: rgb(var(--clr-crit-attack));
+}
+
+.icon-attack-ap {
+    color: rgb(var(--clr-magic));
+}
+
+.icon-attack-ad {
+    color: rgb(var(--clr-physical));
+}
+
+.icon-armor {
+    color: rgb(var(--clr-armor));
+}
+
+.icon-magicResist {
+    color: rgb(var(--clr-magicResist));
+}
+
+.icon-bleed {
+    color: rgb(var(--clr-bleed));
+}
+
+.icon-burn {
+    color: rgb(var(--clr-burn));
+}
+
+.icon-silence {
+    color: rgb(var(--clr-silence));
+}
+
+.icon-heal {
+    color: rgb(var(--clr-heal))
+}
+
+/* Card effect icons bar END */
+
+/* Card select */
+
+.card-selected {
+    position: absolute;
+    background-color: rgba(var(--clr-bg-main), .7);
+    height: 100%;
+    width: 100%;
+    inset: 0;
+    margin: auto;
+    z-index: 99999;
+    display: none;
+}
+
+.card-selected-icon {
+    font-size: var(--font-size-700);
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    color: rgba(var(--clr-bg-secondary));
+}
+
+.card-container.select:hover .card-selected {
+    display: block;
+}
+
+/* Card select END */
+
+/* Card color styles */
+
+.purple {
+    background-color: rgba(var(--clr-purple));
+}
+
+.purple-border {
+    border-color: rgba(var(--clr-purple));
+}
+
+.purple-conic::after,
+.purple-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-purple)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.purple-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-purple)));
+}
+
+.orange {
+    background-color: rgba(var(--clr-orange));
+}
+
+.orange-border {
+    border-color: rgba(var(--clr-orange));
+}
+
+.orange-conic::after,
+.orange-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-orange)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.orange-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-orange)));
+}
+
+.yellow {
+    background-color: rgba(var(--clr-special));
+}
+
+.yellow-border {
+    border-color: rgba(var(--clr-special));
+}
+
+.yellow-conic::after,
+.yellow-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-special)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.yellow-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-special)));
+}
+
+.green {
+    background-color: rgba(var(--clr-green));
+}
+
+.green-border {
+    border-color: rgba(var(--clr-green));
+}
+
+.green-conic::after,
+.green-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-green)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.green-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-green)));
+}
+
+.lightblue {
+    background-color: rgba(var(--clr-lightblue));
+}
+
+.lightblue-border {
+    border-color: rgba(var(--clr-lightblue));
+}
+
+.lightblue-conic::after,
+.lightblue-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-lightblue)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.lightblue-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-lightblue)));
+}
+
+.red {
+    background-color: rgba(var(--clr-red));
+}
+
+.red-border {
+    border-color: rgba(var(--clr-red));
+}
+
+.red-conic::after,
+.red-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-red)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.red-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-red)));
+}
+
+.pink {
+    background-color: rgba(var(--clr-pink));
+}
+
+.pink-border {
+    border-color: rgba(var(--clr-pink));
+}
+
+.pink-conic::after,
+.pink-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-pink)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.pink-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-pink)));
+}
+
+.black {
+    background-color: rgba(var(--clr-black));
+}
+
+.black-border {
+    border-color: rgba(var(--clr-black));
+}
+
+.black-conic::after,
+.black-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-black)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.black-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-black)));
+}
+
+.brown {
+    background-color: rgba(var(--clr-brown));
+}
+
+.brown-border {
+    border-color: rgba(var(--clr-brown));
+}
+
+.brown-conic::after,
+.brown-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-brown)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.brown-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-brown)));
+}
+
+.special {
+    background-color: rgba(var(--clr-special));
+    
+}
+
+.special-border {
+    border-color: rgba(var(--clr-special));
+}
+
+.special-conic::after,
+.special-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-special)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.special-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-special)));
+}
+
+.white {
+    background-color: rgba(var(--clr-white));
+    
+}
+
+.white-border {
+    border-color: rgba(var(--clr-white));
+}
+
+.white-conic::after,
+.white-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-white)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.white-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-white)));
+}
+
+.grey {
+    background-color: rgba(var(--clr-grey));
+    
+}
+
+.grey-border {
+    border-color: rgba(var(--clr-grey));
+}
+
+.grey-conic::after,
+.grey-conic::before {
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-grey)),
+        rgba(var(--clr-blue-dark))
+    );
+}
+
+.grey-triangle {
+    background-image: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-grey)));
+}
+
+@media (min-height: 1000px) and (min-width: 1100px) {
+    .card-container.battle {
+        scale: 1.2;
+        margin: var(--spacer-700) var(--spacer-600);
+    }
+}
+
+@media (min-height: 1200px) and (min-width: 1300px) {
+    .card-container.battle {
+        scale: 1.5;
+        margin: var(--spacer-900) var(--spacer-800);
+    }
+}
+
+@media (min-width: 1500px) {
+    .card-container.battle {
+        margin: var(--spacer-900) var(--spacer-900);
+    }
+}

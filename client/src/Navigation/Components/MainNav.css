@@ -1,0 +1,39 @@
+.main-nav {
+    background-image: var(--nav-gradient);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: var(--br-radius); */
+    position: absolute;
+    z-index: 9999;
+    padding: var(--spacer-100) 0;
+    top: 0;
+}
+
+.main-nav.battle-mode {
+    display: none;
+}
+
+.profile-info-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: var(--font-size-400);
+    margin-top: 0;
+    margin-bottom: 7px;
+}
+
+.logged-in {
+    color: rgb(var(--clr-bg-highlight));
+}
+
+.dropdown-container {
+    position: relative;
+    margin-left: var(--spacer-200);
+}
+
+.nav-button-arrow {
+    font-size: var(--font-size-200);
+}

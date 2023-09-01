@@ -1,0 +1,109 @@
+.requests-modal-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column-reverse; 
+}
+
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotation {
+    0% { --gradient-angle: 0deg;}
+    100% { --gradient-angle: 360deg;}
+}
+
+.request-modal {
+    /* background-color: rgba(var(--clr-bg-red), .7); */
+    width: 250px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    clip-path: var(--polygon-request);
+    padding: var(--spacer-200) var(--spacer-100);
+    margin-top: 10px;
+    position: relative;
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-bg-red)),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-bg-red))
+    );
+    animation: rotation 4s linear infinite;
+}
+
+
+.request-modal-bg {
+    width: 96%;
+    height: 91%;
+    background-color: rgba(var(--clr-bg-main), .9);
+    position: absolute;
+    z-index: -1;
+    clip-path: var(--polygon-request);
+}
+
+.request-icon {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    font-size: var(--font-size-800);
+    opacity: .1;
+}
+
+.request-sender-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.request-img {
+    height: 40px;
+}
+
+.request-img img {
+    height: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.request-sender-info p {
+    font-size: var(--font-size-300);
+    font-family: var(--font-bold);
+    margin: 0;
+}
+
+.request-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.request-buttons button {
+    background-color: rgba(var(--clr-bg-main));
+    border: 1px solid rgba(var(--clr-bg-red));
+    padding: var(--spacer-100) var(--spacer-200);
+    color: rgba(var(--clr-text-highlight));
+    font-family: var(--font-bold);
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.request-buttons button:hover {
+    background-color: rgba(var(--clr-bg-red), .5);
+}
+
+.request-buttons button:active {
+    background-color: rgba(var(--clr-bg-red), .8);
+}
+
+

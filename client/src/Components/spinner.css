@@ -1,0 +1,27 @@
+@keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    40% {
+        transform: rotate(300deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
+.spinner-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid var(--clr-white);
+    border-top: 6px solid var(--clr-blue-grey);
+    border-radius: 50%;
+    animation: spinner 1s linear infinite;
+}

@@ -1,0 +1,259 @@
+:root {
+
+  --font-bold: 'Bahnschrift SemiBold';
+  --font-light: "Bahnschrift Light";
+  /* --font-crit-attack: "optima", sans-serif; */
+
+  --clr-primary-text: 197, 197, 197;
+  --clr-text-highlight: 218, 218, 218;
+
+  --clr-white: 221, 221, 221;
+  --clr-red: 194, 27, 27;
+  --clr-red-dark: rgb(194, 27, 27);
+  --clr-black: 0, 0, 0;
+  --clr-black-light: 40, 40, 40;
+  --clr-blue-dark: 23, 31, 51;
+  --clr-blue-dark-hover: rgb(30, 40, 65);
+  --clr-blue-dark-active: rgba(30, 40, 65, .5);
+  --clr-blue-grey: rgb(28, 34, 51);
+  --clr-purple: 154, 67, 159;
+  --clr-purple-dark: 60, 28, 82;
+  --clr-green: 23, 175, 73;
+  --clr-green-dark: 28, 82, 33;
+  --clr-yellow: 112, 111, 40;
+  --clr-yellow-dark: rgb(23, 175, 73);
+  --clr-orange: 179, 80, 23;
+  --clr-lightblue: 43, 185, 204;
+  --clr-lightblue-dark: rgb(43, 185, 204);
+  --clr-pink: 240, 160, 240;
+  --clr-pink-dark: rgb(112, 20, 117);
+  --clr-special: 169, 143, 1;
+  --clr-special-dark: rgb(15, 15, 15);
+  --clr-brown: 116, 79, 15;
+  --clr-brown-dark: rgb(167, 167, 167);
+  --clr-grey: 140, 140, 140;
+  --clr-poison: 75, 179, 52;
+  --clr-magic: 17, 89, 184;
+  --clr-physical: 165, 81, 81;
+  --clr-armor: 102, 102, 102;
+  --clr-magicResist: 133, 42, 133;
+  --clr-bleed: 216, 33, 33;
+  --clr-burn: 146, 49, 20;
+  --clr-silence: 67, 162, 179;
+  
+  --clr-heal: 42, 164, 69;
+  --clr-crit-attack: 209, 146, 51;
+  
+  --clr-bg-main: 6, 22, 34;
+  --clr-bg-red: 150, 40, 40;
+  /* --clr-bg-secondary: 40, 75, 150; */
+  --clr-bg-secondary: 26, 117, 117;
+  --clr-bg-highlight: 70, 210, 210;
+
+  --animation: 10s linear infinite alternate;
+
+  --spacer-100: .5rem;
+  --spacer-200: .75rem;
+  --spacer-300: 1rem;
+  --spacer-400: 1.25rem;
+  --spacer-500: 1.5rem;
+  --spacer-600: 2rem;
+  --spacer-700: 3rem;
+  --spacer-800: 4rem;
+  --spacer-900: 5rem;
+  --spacer-1000: 7rem; 
+
+  --font-size-100: .75rem;
+  --font-size-200: 1rem;
+  --font-size-300: 1.25rem;
+  --font-size-400: 1.5rem;
+  --font-size-500: 2rem;
+  --font-size-600: 3rem;
+  --font-size-700: 4rem;
+  --font-size-800: 7rem;
+  --font-size-900: 10rem;
+
+  --br-radius: 20px;
+  --box-shadow: 0 0 10px 0;
+  --width-large: 70%;
+  --width-small: 25%;
+  --text-shadow: 2px 2px 2px var(--clr-black);
+  --text-shadow-attack: 3px 3px 3px black;
+
+  --nav-gradient: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(var(--clr-blue-dark), .7), rgba(var(--clr-blue-dark), .8), rgba(var(--clr-blue-dark), .7), rgba(0,0,0,0));
+
+  --gradient-top: linear-gradient(to top, rgb(var(--clr-bg-main)), rgb(var(--clr-bg-secondary)));
+  --gradient-top-red: linear-gradient(to top, rgb(var(--clr-bg-main)), rgb(var(--clr-bg-red)));
+  --gradient-left: linear-gradient(to right, rgb(var(--clr-bg-main)), rgb(var(--clr-bg-secondary)));
+  --gradient-right: linear-gradient(to left, rgb(var(--clr-bg-main)), rgb(var(--clr-bg-secondary)));
+  --gradient-left-red: linear-gradient(to right, rgb(var(--clr-bg-main)), rgb(var(--clr-bg-red)));
+  --gradient-right-red: linear-gradient(to left, rgb(var(--clr-bg-main)), rgb(var(--clr-bg-red)));
+  --gradient-triangle: linear-gradient(to top, rgba(var(--clr-blue-dark)), rgb(var(--clr-bg-red)));
+  --red-gradient: linear-gradient(to right, rgba(var(--clr-bg-red), .4), rgba(var(--clr-bg-red), .8), rgba(var(--clr-bg-red), .4));
+  --bg-secondary-gradient: linear-gradient(to right, rgba(var(--clr-bg-secondary), .4), rgba(var(--clr-bg-secondary), .8), rgba(var(--clr-bg-secondary), .4));
+  --repeating-gradient: repeating-linear-gradient(90deg, rgba(var(--clr-blue-dark), .7) 0%, rgba(var(--clr-blue-dark), .7) 20%, rgba(var(--clr-blue-dark), .5) 20%, rgba(var(--clr-blue-dark), .5) 40%);
+  --card-stat-gradient: repeating-linear-gradient(90deg, rgba(var(--clr-bg-main), 0) 0%, rgba(var(--clr-bg-main), 0) 12%, rgba(var(--clr-bg-main), .9) 50%, rgba(var(--clr-bg-main), 0) 88%, rgba(var(--clr-bg-main), 0) 100%);
+
+  --polygon: polygon(0 5%, 5% 0, 25% 0, 27% 3%, 73% 3%, 75% 0, 95% 0, 100% 5%, 100% 95%, 95% 100%, 75% 100%, 73% 97%, 27% 97%, 25% 100%, 5% 100%, 0 95%);
+  --polygon-img: polygon(0 0, 50% 5%, 100% 0, 100% 20%, 90% 35%, 90% 65%, 100% 80%, 100% 100%, 50% 95%, 0 100%, 0 80%, 10% 65%, 10% 35%, 0 20%);
+  --polygon-card-name: polygon(0 0, 100% 0, 13% 15%, 9% 75%, 58% 100%, 9% 89%, 0 100%, 0 76%, 5% 64%, 5% 32%, 0 14%);
+  --polygon-card-stat:  polygon(0 0, 25% 0, 5% 10%, 3% 50%, 5% 90%, 25% 100%, 0 100%, 0 80%, 2% 75%, 2% 25%, 0 20%);
+  --polygon-octagon-border: polygon(0 20%, 20% 0, 80% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 80%, 0 65%, 4% 65%, 4% 79%, 21% 96%, 79% 96%, 96% 79%, 96% 21%, 79% 4%, 21% 4%, 4% 21%, 4% 67%, 0 65%);
+  --polygon-octagon-bg: polygon(20% 0, 80% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 80%, 0 20%);
+  --polygon-heart: polygon(30% 0, 50% 20%, 70% 0, 85% 0, 100% 25%, 50% 100%, 0 25%, 15% 0);
+  --polygon-hp-border: polygon(0 0, 65% 0, 5% 10%, 8% 50%, 5% 90%, 65% 100%, 0 100%, 0 80%, 2% 70%, 2% 30%, 0 20%);
+  --polygon-card-cover: polygon(0 0, 20% 40%, 20% 60%, 0 100%, 30% 65%, 70% 65%, 100% 100%, 80% 60%, 80% 40%, 100% 0, 70% 35%, 30% 35%, 0 0, 100% 0, 100% 100%, 0 100%);
+  --polygon-turn-indicator: polygon(0 0, 40% 0, 50% 5%, 60% 0, 100% 0, 100% 40%, 98% 50%, 100% 80%, 100% 100%, 75% 100%, 50% 96%, 25% 100%, 0 100%, 0 80%, 2% 50%, 0 40%);
+  --polygon-card-modal: polygon(0 0, 15% 0, 30% 2%, 70% 2%, 85% 0, 100% 0, 100% 40%, 98% 45%, 98% 55%, 100% 60%, 100% 100%, 85% 100%, 70% 98%, 30% 98%, 15% 100%, 0 100%, 0 60%, 2% 55%, 2% 45%, 0 40%);
+  --polygon-user-bar: polygon(0 50%, 3% 5%, 50% 0, 97% 5%, 100% 50%, 97% 95%, 50% 100%, 3% 95%);
+  --polygon-third-nav: polygon(0 0, 50% 5%, 100% 0, 95% 95%, 50% 100%, 5% 95%);
+  --polygon-request: polygon(0 15%, 5% 0, 92% 0, 97% 15%, 97% 83%, 100% 100%, 92% 95%, 5% 95%, 0 80%);
+}
+
+html, body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: rgb(var(--clr-primary-text));
+  font-family: var(--font-light);
+  height: 100%;
+}
+
+.app {
+  min-width: 800px;
+  height: 100vh;
+  position: relative;
+}
+
+.game-wrapper {
+  height: 90%;
+  width: 97%;
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  margin: auto;
+}
+
+.game-wrapper.battle-mode {
+  height: 98vh;
+  width: 98vw;
+  top: 0;
+}
+
+.game-wrapper.battle-mode::before,
+.game-wrapper.battle-mode::after
+{
+  background-image: var(--bg-secondary-gradient);
+}
+
+.game-wrapper::before,
+.game-wrapper::after {
+  content: "";
+  width: 49%;
+  height: 2.4%;
+  /* background-color: rgba(var(--clr-bg-red), .8); */
+  background-image: var(--red-gradient);
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  clip-path: polygon(3.2% 0%,96.8% 0%,100% 100%,0% 100%);
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.game-wrapper::before {
+  rotate: 180deg;
+  top: 0;
+}
+
+.game-wrapper::after {
+  bottom: 0;
+}
+
+.game-body {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow-y: scroll;
+  border: 4px solid rgba(var(--clr-bg-red), .6);
+  clip-path: var(--polygon);
+}
+
+.game-body.battle-mode {
+  border-color: rgba(var(--clr-bg-secondary), .9);
+}
+
+.game-body::-webkit-scrollbar {
+  display: none;
+}
+
+.game-interface {
+  width: 100%;
+  /* min-height: 900px; */
+  height: 100%;
+  overflow-y: hidden;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  background: var(--repeating-gradient);
+}
+
+.game-interface.battle-mode {
+  background: rgba(var(--clr-bg-main), .7);
+  min-height: 750px;
+  min-width: 900px;
+}
+
+.game-interface::-webkit-scrollbar {
+  display: none;
+}
+
+.game-content-container {
+  padding: var(--spacer-600) 0;
+  width: 90%;
+  height: 89%;
+  overflow-y: scroll;
+  position: absolute;
+  bottom: 0;
+}
+
+.game-content-container.battle-mode {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.game-content-container::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-height: 800px) {
+  .game-content-container {
+      height: 85%;
+  }
+}
+
+@media (min-height: 1400px) {
+  .game-content-container {
+      height: 92%;
+  }
+}
+
+@media (max-width: 900px) {
+  .game-wrapper.battle-mode {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+

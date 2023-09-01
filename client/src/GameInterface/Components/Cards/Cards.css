@@ -1,0 +1,147 @@
+.game-content-container.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.card-modal-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: var(--spacer-700);
+}
+
+.card-modal-container {
+    background-color: rgba(var(--clr-bg-main));
+    inset: 0;
+    margin: auto;
+    position: absolute;
+    width: 90%;
+    height: 83%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+
+
+.card-modal-info-container {
+    width: 40%;
+    max-width: 500px;
+    height: 80%;
+    position: relative;
+    clip-path: var(--polygon-card-modal);
+    color: rgba(var(--clr-text-highlight));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.card-modal-info-bg {
+    width: 99%;
+    height: 99%;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background-color: rgba(var(--clr-bg-main), .9);
+    clip-path: var(--polygon-card-modal);
+    z-index: -1;
+}
+
+.card-modal-title {
+    border-bottom: 1px solid rgba(var(--clr-text-highlight));
+    margin: 0;
+    width: 90%;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-bold);
+    font-size: var(--font-size-500);
+}
+
+.card-modal-stat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 40%;
+    width: 100%;
+}
+
+.card-modal-stat {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    border-bottom: 1px solid rgba(var(--clr-text-highlight));
+}
+
+.card-modal-stat p {
+    margin: 0;
+    font-size: var(--font-size-400);
+}
+
+.card-modal-stat p:last-child {
+    display: flex;
+    align-items: center;
+}
+
+
+.card-modal-icon {
+    font-size: var(--font-size-100);
+}
+
+.card-modal-skill {
+    width: 80%;
+    height: 30%;
+}
+
+.card-modal-skill-title {
+    text-align: center;
+    border-bottom: 1px solid rgba(var(--clr-text-highlight));
+    font-size: var(--font-size-400);
+    margin: 0;
+}
+
+.card-modal-skill p {
+    font-size: var(--font-size-300);
+}
+
+.card-modal-skill-description {
+    overflow-y: scroll;
+    height: 90%;
+}
+
+.card-modal-skill-description::-webkit-scrollbar {
+    display: none;
+}
+
+.card-modal-close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 1px solid rgba(var(--clr-bg-red));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(var(--clr-bg-red), .1);
+    font-size: var(--font-size-500);
+    clip-path: var(--polygon-card-modal);
+    color: rgba(var(--clr-bg-red));
+    cursor: pointer;
+    padding: 10px;
+}
+
+.card-modal-close-button:hover {
+    background-color: rgba(var(--clr-bg-red), .3);
+}
+
+.card-modal-close-button:active {
+    background-color: rgba(var(--clr-bg-red), .5);
+}
+
+@media (max-width: 1200px) {
+    .card-modal-stat {
+        width: 80%;
+    }
+}

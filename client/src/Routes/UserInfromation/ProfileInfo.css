@@ -1,0 +1,102 @@
+.profile-info-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.user-info {
+    background-color: rgba(var(--clr-bg-main), .95);
+    width: 500px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    clip-path: var(--polygon-user-bar);
+}
+
+.user-image {
+    height: 70%;
+    aspect-ratio: 1/1;
+}
+
+.user-image img {
+    object-fit: cover;
+    height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(var(--clr-bg-secondary), .5);
+}
+
+.user-info h1 {
+    font-family: var(--font-bold);
+    font-size: var(--font-size-500);
+    text-shadow: 1px 1px 3px rgba(var(--clr-bg-secondary));
+}
+
+.battle-info-container {
+    /* background-color: rgba(var(--clr-bg-main), .7); */
+    border: 3px solid rgba(var(--clr-bg-red));
+    clip-path: var(--polygon-card-modal);
+    height: 60%;
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.battle-statistics {
+    /* margin-top: var(--spacer-700); */
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.battle-statistics:first-child {
+    background-color: rgba(var(--clr-blue-dark), .9);
+    border-right: 2px solid rgba(var(--clr-bg-red));
+}
+
+.battle-statistics:nth-child(2) {
+    background-color: rgba(var(--clr-bg-main), .8);
+}
+
+.battle-statistics h2 {
+    text-align: center;
+    font-family: var(--font-bold);
+    font-size: var(--font-size-500);
+    margin: 0 0 var(--spacer-300);
+}
+
+.battle-info {
+    width: 65%;
+}
+
+.battle-info p {
+    font-size: var(--font-size-400);
+    margin: var(--spacer-300);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(var(--clr-bg-red));
+}
+
+.battle-info p span:last-child {
+    display: flex;
+    align-items: flex-start;
+}
+
+@media (max-width: 1000px) {
+    .battle-info {
+        width: 90%;
+    }
+}
+
+@media (min-width: 1600px) {
+    .battle-info-container {
+        width: 60%;
+    }
+}
+

@@ -1,0 +1,232 @@
+.friends-wrapper {
+    width: 100%;
+    height: 92%;
+    position: absolute;
+    bottom: 0;
+}
+
+.search-user-container {
+    text-align: center;
+    margin-bottom: var(--spacer-500);
+    width: 100%;
+    position: relative;
+}
+
+.input-bg {
+    position: absolute;
+    width: 430px;
+    height: 100%;
+    /* background-color: red; */
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1;
+    border-radius: 2px;
+}
+
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotation {
+    0% { --gradient-angle: 0deg;}
+    100% { --gradient-angle: 360deg;}
+}
+
+.search-user-container input {
+    width: 400px;
+    text-align: left;
+    padding: 7px 15px;
+    border: none;
+    background-color: rgba(var(--clr-bg-main));
+    color: rgba(var(--clr-text-highlight));
+    font-size: var(--font-size-300);
+    border-radius: 1px;
+    z-index: 10;
+    position: relative;
+    font-family: var(--font-light);
+}
+
+.input-bg::after,
+.input-bg::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    background-image: conic-gradient(
+        from var(--gradient-angle),
+        rgba(var(--clr-blue-dark)),
+        rgba(var(--clr-bg-red)),
+        rgba(var(--clr-blue-dark))
+    );
+    animation: rotation 4s linear infinite;
+}
+
+.search-user-container input:focus {
+    outline: none;
+}
+
+.users-container {
+    height: 93%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.users-container::-webkit-scrollbar {
+    display: none;
+}
+
+.user-bar-wrapper {
+    /* background-color: rgba(var(--clr-bg-red)); */
+    background-image: var(--red-gradient);
+    width: 90%;
+    height: 70px;
+    margin-bottom: var(--spacer-300);
+    max-width: 1200px;
+    clip-path: var(--polygon-user-bar);
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.user-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    height: 100%;
+}
+
+.user-bar-username {
+    margin: 0;
+    font-size: var(--font-size-300);
+    color: rgba(var(--clr-text-highlight));
+}
+
+.user-bar-img-name {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.user-bar-image {
+    height: 70%;
+    aspect-ratio: 1/1;
+    margin-right: var(--spacer-500);
+}
+
+.user-bar-image img {
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+.leaderboard-rank {
+    margin: 0 var(--spacer-500);
+    font-size: var(--font-size-300);
+    font-family: var(--font-bold);
+}
+
+.profile-modal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    margin: auto;
+    z-index: 9999999;
+    background-color: rgba(var(--clr-black), .8);
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 1px solid rgba(var(--clr-bg-red));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(var(--clr-bg-red), .1);
+    font-size: var(--font-size-500);
+    clip-path: var(--polygon-card-modal);
+    color: rgba(var(--clr-bg-red));
+    cursor: pointer;
+    padding: 10px;
+}
+
+.modal-close-button:hover {
+    background-color: rgba(var(--clr-bg-red), .3);
+}
+
+.modal-close-button:active {
+    background-color: rgba(var(--clr-bg-red), .5);
+}
+
+.leaderboard-points {
+    margin: 0;
+    font-size: var(--font-size-400);
+    font-family: var(--font-bold);
+    display: flex;
+}
+
+.leaderboard-points:nth-child(2) {
+    margin-right: var(--spacer-500);
+}
+
+.user-action-buttons-container {
+    display: flex;
+}
+
+
+.user-action-button {
+    font-size: var(--font-size-400);
+    background-color: rgba(var(--clr-blue-dark), .8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0 0 0 10px;
+}
+
+.user-action-button:hover {
+    scale: 1.1;
+}
+
+.user-action-button:active {
+    scale: 1;
+}
+
+@keyframes spinner {
+    0% {transform: rotate(0deg);}
+    40% {transform: rotate(300deg);}
+    100% {transform: rotate(360deg);}
+}
+
+.user-action-button.spinner {
+    animation: spinner 1s infinite linear;
+}
+
+.online-indicator {
+    width: 13px;
+    height: 13px;
+    background-color: rgb(var(--clr-red));
+    position: absolute;
+    left: 5%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+}
+
+.online-indicator.online {
+    background-color: rgb(var(--clr-poison));
+}

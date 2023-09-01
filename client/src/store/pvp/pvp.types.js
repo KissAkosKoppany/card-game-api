@@ -1,0 +1,4 @@
+export const PVP_ACTION_TYPES = {
+    SET_PVP_ROOM: 'SET_PVP_ROOM',
+    SET_PVP_REFEREE: 'SET_PVP_REFEREE'
+}

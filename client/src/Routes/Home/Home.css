@@ -1,0 +1,9 @@
+.test {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.76);
+    font-size: 3rem;
+}

@@ -1,0 +1,135 @@
+.card-select-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card-select-container {
+    display: flex;
+    padding: var(--spacer-500) 0;
+    /* position: absolute; */
+    /* inset: 0; */
+    height: 400px;
+    /* margin: auto; */
+    width: 90%;
+    overflow-x: scroll;
+    background-color: rgba(var(--clr-bg-secondary), .1);
+    border: 2px solid rgba(var(--clr-bg-secondary));
+    clip-path: var(--polygon);
+}
+
+.card-select-container::-webkit-scrollbar {
+    display: none;
+}
+
+.card-select {
+    cursor: pointer;
+    border-radius: 3px;
+    position: relative;
+}
+
+.card-select:hover {
+    background-color: rgba(var(--clr-bg-secondary), .2);
+}
+
+.card-slider-button {
+    position: absolute;
+    height: 150px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 9999999;
+    font-size: var(--font-size-600);
+    color: rgba(var(--clr-bg-secondary));
+    border: 1px solid rgba(var(--clr-bg-red));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(var(--clr-bg-red), .1);
+    clip-path: var(--polygon-card-modal);
+    cursor: pointer;
+}
+
+.card-slider-button:hover {
+    background-color: rgba(var(--clr-bg-red), .3);
+}
+
+.card-slider-button:active {
+    background-color: rgba(var(--clr-bg-red), .5);
+}
+
+.card-slider-button.left {
+    left: 5px;
+}
+
+.card-slider-button.right {
+    right: 5px;
+}
+
+.card-select-container.selected {
+    justify-content: center;
+}
+
+.card-confirmation {
+    margin-top: var(--spacer-700);
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-confirm-button {
+    width: 200px;
+    font-size: var(--font-size-300);
+    font-family: var(--font-bold);
+    padding: var(--spacer-200) 0;
+    color: rgba(var(--clr-bg-secondary));
+    border: 1px solid rgba(var(--clr-bg-red));
+    background-color: rgba(var(--clr-bg-red), .1);
+    clip-path: var(--polygon-card-modal);
+    cursor: pointer;
+}
+
+.card-confirm-button:hover {
+    background-color: rgba(var(--clr-bg-red), .3);
+}
+
+.card-confirm-button:active {
+    background-color: rgba(var(--clr-bg-red), .5);
+}
+
+.snaps-inline {
+    scroll-snap-type: inline mandatory;
+    scroll-behavior: smooth;
+}
+
+.snaps-inline > * {
+    scroll-snap-align: start;
+}
+
+@media (max-width: 1500px) {
+    .card-select-container {
+        width: 85%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .card-select-container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 950px) {
+    .card-select-container {
+        width: 77%;
+    }
+
+    .card-slider-button.left {
+        left: 30px;
+    }
+    
+    .card-slider-button.right {
+        right: 30px;
+    }
+}

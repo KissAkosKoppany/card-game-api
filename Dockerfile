@@ -2,12 +2,21 @@ FROM node:lts-alpine
 
 WORKDIR /app
 
-COPY . .
+COPY package.json ./
 
-RUN npm install
+COPY client/package*.json client/
+RUN npm run install-client --omit=dev
+
+COPY server/package*.json server/
+RUN npm run install-server --omit=dev
+
+COPY client/ client/
+RUN npm run build --prefix client
+
+COPY server/ server/
 
 USER node
 
-EXPOSE 8000
+CMD [ "npm", "run", "start", "--prefix", "server" ]
 
-CMD [ "npm", "run", "start" ]
+EXPOSE 8000
