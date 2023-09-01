@@ -3,7 +3,7 @@ const { httpLoadUserInfo, httpLoadAllUsers, httpGetPlayerInfo, httpUpdateProfile
 
 const userRouter = express.Router();
 
-userRouter.get('/user', httpLoadUserInfo)
+userRouter.get('/currentUser/:id', httpLoadUserInfo)
 userRouter.get('/user/:id', httpGetPlayerInfo)
 userRouter.get('/all-users', httpLoadAllUsers)
 userRouter.post('/send-friend-request', httpUpdateUserRequests)

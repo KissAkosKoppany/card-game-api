@@ -1,4 +1,5 @@
 async function redirectAfterLogin(req, res) {
+    res.cookie('userId', req.user.id)
     res.redirect('https://ascendedbattle.com')
 }
 
@@ -9,5 +10,5 @@ async function logoutUser(req, res) {
 
 module.exports = {
     redirectAfterLogin,
-    logoutUser
+    logoutUser,
 }

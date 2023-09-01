@@ -1,8 +1,10 @@
 const { getUserInfo, getAllUsers, updateUserRequests, acceptFriendRequest, updateUsername, updateProfileImage, updateUserAfterBattleEnd, rejectFriendRequest } = require('../../models/users.model')
 
 async function httpLoadUserInfo(req, res) {
-    if(req.user) {
-        const user = await getUserInfo(req.user)
+    // console.log(req.session)
+    if(req.params.id) {
+        const userId = req.params.id;
+        const user = await getUserInfo(userId)
         res.status(200).json(user)
     }
 }

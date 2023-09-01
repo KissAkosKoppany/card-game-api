@@ -14,12 +14,12 @@ const AUTH_OPTIONS = {
 }
 
 passport.serializeUser((user, done) => {
-    // console.log('seri', user)
+    console.log('seri', user.id)
     done(null, user.id)
 })
 
 passport.deserializeUser((id, done) => {
-    // console.log(User.findById(user._id))
+    console.log('deseri', id)
     done(null, id)
 })
 
