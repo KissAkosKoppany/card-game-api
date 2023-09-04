@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-// import { CardContext } from '../../../../../contexts/card.context'
-import './CardSelect.style.css'
 
 import { useDispatch, useSelector } from 'react-redux'
+import { setPlayerBattleCards } from '../../../../../store/cards/cards.action'
 
 import SelectedCards from '../Components/SelectedCards'
 import CardSelectSlider from '../Components/CardSelectSlider'
-import { setPlayerBattleCards } from '../../../../../store/cards/cards.action'
 
+import { soundEffects } from '../../../../../SoundEffects/soundEffects'
 
+import './CardSelect.style.css'
 
 const CardSelect = () => {
 
@@ -16,6 +16,7 @@ const CardSelect = () => {
     const cards = useSelector((state) => state.rootReducer.cards.cards)
 
     const setFightingcards = (cards) => {
+        soundEffects.accept.play()
         dispatch(setPlayerBattleCards(cards))
     }
 
@@ -23,11 +24,13 @@ const CardSelect = () => {
     const [selectedCards, setSelectedCards] = useState([])
 
     const handleCardSelect = (card) => {
+        soundEffects.select.play()
         setSelectedCards([...selectedCards, card])
         setCardSelectList(cards => cards.filter(item => item.id !== card.id))
     }
 
     const resetCardSelect = () => {
+        soundEffects.decline.play()
         setSelectedCards([]);
         setCardSelectList(cards)
     }

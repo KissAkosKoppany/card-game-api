@@ -1,10 +1,11 @@
 import React from 'react'
-import { GiTrophy, GiPartyPopper, GiWilliamTellSkull, GiBossKey } from 'react-icons/gi'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { setOpponentBattleCards } from '../../../store/cards/cards.action'
-import { useLoadUserInfo } from '../../../hooks/useLoadUserInfo'
 
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useLoadUserInfo } from '../../../hooks/useLoadUserInfo'
+import { setOpponentBattleCards } from '../../../store/cards/cards.action'
+
+import { GiTrophy, GiPartyPopper, GiWilliamTellSkull, GiBossKey } from 'react-icons/gi'
 
 const BattleEndStoryMode = ({ battle, setBattleMode }) => {
 

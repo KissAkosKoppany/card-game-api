@@ -10,7 +10,8 @@ const CardImage = ({ card, opponent, videoRef, animation, socket }) => {
           console.log('playvideo', videoRef.current)
           setTimeout(() => {
             videoRef.current.play()
-          }, 2600)
+            // 2600
+          }, 1700)
         }
       })
     }

@@ -8,7 +8,6 @@ export const useLoadUserInfo = () => {
     
     const loadUser = useCallback(async() => {
         const userInfo = await getUserInfo()
-        console.log('userinfo', userInfo)
         if(userInfo) {
             dispatch(setCurrentUser(userInfo))
         }

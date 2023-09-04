@@ -13,7 +13,7 @@ const PvpOnlinePlayers = ({socket}) => {
 
     useEffect(() => {
       setUsersList(users.filter(user => user.isOnline && user.id !== currentUser.id))
-    }, [users])
+    }, [users, currentUser.id])
 
   return (
     <div className='pvp-players'>

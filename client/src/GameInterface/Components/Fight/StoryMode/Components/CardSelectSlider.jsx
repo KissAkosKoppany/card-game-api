@@ -1,16 +1,21 @@
 import React from 'react'
+
 import Card from '../../../../../Components/Card/Card'
+
+import { soundEffects } from '../../../../../SoundEffects/soundEffects'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight} from 'react-icons/md'
 
 const CardSelectSlider = ({ handleCardSelect, cardSelectList }) => {
 
     const slideLeft = async function() {
+        soundEffects.navButton.play()
         const slider = document.getElementById('slider');
         var scrollLeft = slider.scrollLeft - (slider.clientWidth - 500);
         return slider.scrollLeft = scrollLeft;
     }
         
     const slideRight = async function() {
+        soundEffects.navButton.play()
         const slider = document.getElementById('slider');
         var scrollRight = slider.scrollLeft + (slider.clientWidth - 500);
         return slider.scrollLeft = scrollRight;

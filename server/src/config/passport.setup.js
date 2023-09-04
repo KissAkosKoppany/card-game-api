@@ -14,12 +14,10 @@ const AUTH_OPTIONS = {
 }
 
 passport.serializeUser((user, done) => {
-    console.log('seri', user.username)
     done(null, user.id)
 })
 
 passport.deserializeUser((id, done) => {
-    console.log('deseri', id)
     done(null, id)
 })
 
@@ -41,7 +39,6 @@ async function verifyCallback(accessToken, refreshToken, profile, done) {
             admin: false,
             isOnline: false
         }).save()
-        console.log('new user created')
         done(null, newUser)
     }
 }

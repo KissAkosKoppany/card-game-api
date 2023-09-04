@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { delay, playerChoice } from "./helpers"
 import { useAiOpponent } from "./useAiOpponent"
 import { soundEffects } from "../../../../SoundEffects/soundEffects"
-import { damageValue, handleHp, handleDamageReceived, skillChargeUpdate, skillChargeUpdateAtRoundEnd, checkCardDeath } from "../BattleFunctions/battleFunctionHelpers"
+import { damageValue, handleHp, handleDamageReceived, skillChargeUpdate, skillChargeUpdateAtRoundEnd, checkCardDeath, updateSkillCharge } from "../BattleFunctions/battleFunctionHelpers"
 import { activeSkills } from "../BattleFunctions/activeSkills"
 import { effectsHandler } from "../BattleFunctions/effectsHandler"
 import { activeSkillBoss } from "../BattleFunctions/activeSkillBoss"
@@ -50,7 +50,6 @@ export const useBattleSequence = (userId, setBattleMode) => {
 
     useEffect(() => {
         if (round !== 1) {
-            console.log("skill update")
             skillChargeUpdateAtRoundEnd(setMonsterCards, round)
             skillChargeUpdateAtRoundEnd(setPlayerCards, round)
         }
@@ -63,7 +62,6 @@ export const useBattleSequence = (userId, setBattleMode) => {
             )
             if (!nonStunedCards.length) {
                 setTurn(1)
-                console.log("everyone is stunned")
             }
         }
         // eslint-disable-next-line
@@ -82,32 +80,34 @@ export const useBattleSequence = (userId, setBattleMode) => {
             switch(mode) {
                 case "normalAttack": {
                     let damage = damageValue(attacker, receiver)
-                    // console.log(damage, "naaaaa")
                     let damageTaken = handleHp(receiver?.hp - damage.value);
 
                     (async () => {
                         setInSequence(true)
-                        // console.log(`${attacker?.name} is the attacker, ${receiver?.name} is the reciever`)
 
                         turn === 0 
                             ? setPlayerAnimation({ state: true, id: attacker?.id, name: "atk-animation" })
                             : setOpponentAnimation({ state: true, id: attacker?.id, name: "atk-animation"})
+                        // 300
                         await delay(300);
 
                         soundEffects.attack.play()
-                        await delay(400);
+                        // 400
+                        await delay(300);
             
                         turn === 0 
                             ? setPlayerAnimation({ state: false, id: 0, name: ""})
                             : setOpponentAnimation({ state: false, id: 0, name: ""})
-                        await delay(500);
+                        //500
+                        await delay(400);
 
                         turn === 0 
                             ? setOpponentAnimation({ state: true, id: receiver?.id, name: "dmg-take"})
                             : setPlayerAnimation({ state: true, id: receiver?.id, name: "dmg-take"})
                         
                         soundEffects.dmgTake.play()
-                        await delay(500);
+                        //500
+                        await delay(400);
 
                         turn === 0 
                             ? setOpponentAnimation({ state: false, id: 0, name: ""})
@@ -122,16 +122,14 @@ export const useBattleSequence = (userId, setBattleMode) => {
                                 if (card.id !== receiver.id) return card
                                     return {...card, action: {name: "onDamageReceived", type: damage.type, value: damage.value, attackType: damage.attackType}}
                             }))
-
-                        await delay(1000);
-
+                        //1000
+                        await delay(800);
 
                         turn === 0 
                             ? handleDamageReceived(setMonsterCards, receiver.id, damageTaken)  
                             : handleDamageReceived(setPlayerCards, receiver.id, damageTaken)
-                        console.log(`attack done`)
-
-                        await delay(2500)
+                        //2500
+                        await delay(2000)
 
                         turn === 0
                             ? setMonsterCards(cards => cards.map(card => {
@@ -147,15 +145,15 @@ export const useBattleSequence = (userId, setBattleMode) => {
                             ? skillChargeUpdate(setMonsterCards, attacker)  
                             : skillChargeUpdate(setPlayerCards, attacker)
                         // soundEffects.activeSkillCharge.play()
-
-                        await delay(2000)
+                        //2000
+                        await delay(500)
 
                         //card death check
                         turn === 1
                             ? checkCardDeath(setPlayerCards)
                             : checkCardDeath(setMonsterCards)
-
-                        await delay(1500)
+                        //1500
+                        await delay(1000)
         
                         setRound(round => turn === 0 ? round : round + 1)
 
@@ -171,77 +169,57 @@ export const useBattleSequence = (userId, setBattleMode) => {
                     (async() => {
                         setInSequence(true);
                         // console.log(`${attacker?.name} is the attacker, ${receiver?.name} is the reciever`)
+                        //300
+                        await delay(200)
 
-                        await delay(300)
-
-                        turn === 1 ? setMonsterCards(cards => cards.map(card => {
-                            if ( card.id === attacker.id) {
-                                return {...card, skillCharge: 2}
-                            } return card
-                        })) : setPlayerCards(cards => cards.map(card => {
-                            if (card.id === attacker.id) {
-                                console.log(card.name)
-                                return {...card, skillCharge: 2}
-                            } return card
-                        }))
+                        turn === 1
+                            ? updateSkillCharge(setMonsterCards, attacker, 2)
+                            : updateSkillCharge(setPlayerCards, attacker, 2)
                         soundEffects.activeSkillPop.play()
+                        //800
+                        await delay(700)
 
-                        await delay(800)
-
-                        turn === 1 ? setMonsterCards(cards => cards.map(card => {
-                            if ( card.id === attacker.id) {
-                                return {...card, skillCharge: 1}
-                            } return card
-                        })) : setPlayerCards(cards => cards.map(card => {
-                            if (card.id === attacker.id) {
-                                return {...card, skillCharge: 1}
-                            } return card
-                        }))
+                        turn === 1
+                        ? updateSkillCharge(setMonsterCards, attacker, 1)
+                        : updateSkillCharge(setPlayerCards, attacker, 1)
                         soundEffects.activeSkillPop.play()
+                        //800
+                        await delay(700)
 
-                        await delay(800)
-
-                        turn === 1 ? setMonsterCards(cards => cards.map(card => {
-                            if ( card.id === attacker.id) {
-                                return {...card, skillCharge: 0}
-                            } return card
-                        })) : setPlayerCards(cards => cards.map(card => {
-                            if (card.id === attacker.id) {
-                                return {...card, skillCharge: 0}
-                            } return card
-                        }))
+                        turn === 1
+                            ? updateSkillCharge(setMonsterCards, attacker, 0)
+                            : updateSkillCharge(setPlayerCards, attacker, 0)
                         soundEffects.activeSkillPop.play()
-
-                        await delay(800)
+                        //800
+                        await delay(700)
                         
                         turn === 0 
                             ? setPlayerAnimation({ state: true, id: attacker?.id, name: "skill-animation" })
                             : setOpponentAnimation({ state: true, id: attacker?.id, name: "skill-animation" })
-                        await delay(5000);
-
-                        turn === 0 
-                            ? setPlayerAnimation({ state: false, id: 0, name: "" })
-                            : setOpponentAnimation({ state: false, id: 0, name: "" })
-                        await delay(700);
+                        //5000
+                        await delay(4000);
 
                         turn === 0 
                             ? activeSkills(setPlayerCards, setMonsterCards, playerCards, monsterCards, attacker, receiver, round, setPlayerEffects, setOpponentEffects)
                             : activeSkillBoss(setPlayerCards, setMonsterCards, playerCards, monsterCards, attacker, receiver, round, setOpponentEffects, setPlayerEffects)
-
-
-                        await delay(5000)
-
-                        console.log(`attack done`)
-
+                        //700
+                        await delay(1000);
                         
+                        turn === 0 
+                            ? setPlayerAnimation({ state: false, id: 0, name: "" })
+                            : setOpponentAnimation({ state: false, id: 0, name: "" })
+
+
+                        //5000
+                        await delay(2000)
 
                         //card death check
-                        turn === 1
-                            ? checkCardDeath(setPlayerCards)
-                            : checkCardDeath(setMonsterCards)
+                        checkCardDeath(setPlayerCards)
+                        checkCardDeath(setMonsterCards)                        
 
                         setRound(round => turn === 0 ? round : round + 1)
-                        await delay(1500)
+                        //1500
+                        await delay(1000)
                         setTurn(turn === 0 ? 1 : 0)
                         setInSequence(false)
                     })()

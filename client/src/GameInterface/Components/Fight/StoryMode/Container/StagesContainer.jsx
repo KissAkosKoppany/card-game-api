@@ -1,7 +1,10 @@
 import React from 'react'
-import "./Stages.style.css"
-import StagePreview from '../Components/StagePreview'
+
 import { useStages } from '../../../../../hooks/useStages'
+
+import StagePreview from '../Components/StagePreview'
+
+import "./Stages.style.css"
 
 const StagesContainer = ({ setBattleMode }) => {
 

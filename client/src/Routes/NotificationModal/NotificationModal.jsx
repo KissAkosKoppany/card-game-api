@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect } from 'react'
-import './NotificationModal.style.css'
-import Notification from './Component/Notification'
 import uuid from 'react-uuid'
-import { useDispatch, useSelector } from 'react-redux'
+
 import { setNotifications } from '../../store/notifications/notifications.action'
+import { useDispatch, useSelector } from 'react-redux'
+
+import Notification from './Component/Notification'
+
+import './NotificationModal.style.css'
 
 const NotificationModal = ({ socket }) => {
 

@@ -1,9 +1,12 @@
 import React from 'react'
-import './AdminPage.style.css'
+
 import { Link, Route, Routes } from 'react-router-dom'
 import { httpCreateCard, httpCreateBossCard } from '../../hooks/requests'
+
 import CardCreation from './Components/CardCreation'
 import StageCreation from './Components/StageCreation'
+
+import './AdminPage.style.css'
 
 const AdminPage = () => {
 

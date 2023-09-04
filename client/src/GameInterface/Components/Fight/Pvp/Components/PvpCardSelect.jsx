@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import '../../StoryMode/Container/CardSelect.style.css'
-import SelectedCards from '../../StoryMode/Components/SelectedCards'
-import CardSelectSlider from '../../StoryMode/Components/CardSelectSlider'
+
+import { soundEffects } from '../../../../../SoundEffects/soundEffects'
 import { useDispatch, useSelector } from 'react-redux'
 import { setOpponentBattleCards, setPlayerBattleCards } from '../../../../../store/cards/cards.action'
+
+import SelectedCards from '../../StoryMode/Components/SelectedCards'
+import CardSelectSlider from '../../StoryMode/Components/CardSelectSlider'
+
+import '../../StoryMode/Container/CardSelect.style.css'
 
 const PvpCardSelect = ({ socket }) => {
 
@@ -14,7 +18,8 @@ const PvpCardSelect = ({ socket }) => {
     const currentUser = useSelector(state => state.rootReducer.user.currentUser)
 
     const setFightingcards = (cards) => {
-        const isReferee = refereeId == currentUser.id
+        soundEffects.accept.play()
+        const isReferee = refereeId === currentUser.id
         if(isReferee) {
             dispatch(setPlayerBattleCards(cards))
         } else {
@@ -27,11 +32,13 @@ const PvpCardSelect = ({ socket }) => {
     const [selectedCards, setSelectedCards] = useState([])
 
     const handleCardSelect = (card) => {
+        soundEffects.select.play()
         setSelectedCards([...selectedCards, card])
         setCardSelectList(cards => cards.filter(item => item.id !== card.id))
     }
 
     const resetCardSelect = () => {
+        soundEffects.decline.play()
         setSelectedCards([]);
         setCardSelectList(cards)
     }

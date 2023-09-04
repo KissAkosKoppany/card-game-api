@@ -21,20 +21,6 @@ const CardBattleIcons = ({ card, handleSetSequence, pvp, isReferee, inSequence, 
     }
   }
 
-  // useEffect(() => {
-  //   if(socket) {
-  //     socket.on('playSkillVideo', cardId => {
-  //       console.log(isReferee, card.name)
-  //       if(cardId === card.id) {
-  //         console.log('playvideo', videoRef.current)
-  //         setTimeout(() => {
-  //           videoRef.current.play()
-  //         }, 2600)
-  //       }
-  //     })
-  //   }
-  // }, [socket])
-
   return (
     <div className='card-battle-icons-wrapper'>
         <div onClick={() => {handleSetSequence("activeSkill", i, card); handleVideoPlay()}} className="card-battle-icon-container">

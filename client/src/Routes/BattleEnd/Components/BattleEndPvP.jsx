@@ -1,8 +1,10 @@
 import React from 'react'
-import { GiTrophy, GiWilliamTellSkull, GiShurikenAperture } from 'react-icons/gi'
+
 import { Link } from 'react-router-dom'
-import { useLoadUserInfo } from '../../../hooks/useLoadUserInfo'
 import { useSelector } from 'react-redux'
+import { useLoadUserInfo } from '../../../hooks/useLoadUserInfo'
+
+import { GiTrophy, GiWilliamTellSkull, GiShurikenAperture } from 'react-icons/gi'
 
 const BattleEndPvP = ({ battle }) => {
 

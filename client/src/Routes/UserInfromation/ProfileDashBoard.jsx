@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { GiBossKey, GiShurikenAperture, GiSwordsPower, GiWilliamTellSkull, GiChampions } from 'react-icons/gi'
 
 const ProfileDashBoard = ({ currentUser }) => {

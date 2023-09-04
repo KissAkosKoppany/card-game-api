@@ -1,6 +1,8 @@
 import React from 'react';
-import './SecondaryNav.style.css';
+
 import NavButton from '../NavButton/NavButton';
+
+import './SecondaryNav.style.css';
 
 const SecondaryNav = ({ links, battleMode }) => {
 

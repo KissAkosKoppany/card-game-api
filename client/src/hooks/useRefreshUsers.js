@@ -10,7 +10,7 @@ export const useRefreshUsers = (socket) => {
                 dispach(setAllUsers(users))
             })
         }
-    }, [socket])
+    }, [socket, dispach])
 
     useEffect(() => {
         refreshUsers()

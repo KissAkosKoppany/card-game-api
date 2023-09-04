@@ -1,11 +1,14 @@
 import React, { useRef } from 'react'
 
+import { soundEffects } from '../../../SoundEffects/soundEffects'
+
 const SearchUsers = ({ usersList, setUsers }) => {
 
   const searchfieldRef = useRef()
 
     const handleUserSearch = (e) => {
         if(e.key === 'Enter') {
+            soundEffects.navButton.play()
             setUsers(usersList.filter(user => user.username.toLowerCase().includes(searchfieldRef.current.value)))
         }
     }

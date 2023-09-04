@@ -52,7 +52,6 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
     useEffect(() => {
         if (isReferee) {
             if (round !== 1) {
-                console.log("skill update")
                 skillChargeUpdateAtRoundEnd(setOpponentCards, round)
                 skillChargeUpdateAtRoundEnd(setPlayerCards, round)
                 socket.emit('skillChargeUpdateAtRoundEnd', round, room)
@@ -62,6 +61,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
 
     useEffect(() => {
         if(isReferee) {
+            socket.emit('round', round, room)
             if (turn === 0) {
                 const nonStunedCards = playerCards.filter(card => 
                     (round - card?.stunRound >= card?.stunLength || !card?.stunRound)
@@ -117,7 +117,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
     
                             soundEffects.attack.play()
                             socket.emit('attackSoundEffect', (room))
-                            await delay(400);
+                            await delay(300);
                 
                             turn === 0 
                                 ? setPlayerAnimation({ state: false, id: 0, name: "" })
@@ -125,7 +125,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
                             
                             socket.emit('animation', { state: false, id: 0, name: "" }, turn, room)
 
-                            await delay(500);
+                            await delay(400);
     
                             turn === 0 
                                 ? setOpponentAnimation({ state: true, id: receiver?.id, name: "dmg-take"})
@@ -135,7 +135,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
                             
                             soundEffects.dmgTake.play()
                             socket.emit('dmgTakeSoundEffect', (room))
-                            await delay(500);
+                            await delay(400);
     
                             turn === 0 
                                 ? setOpponentAnimation({ state: false, id: 0, name: ""})
@@ -149,17 +149,15 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
 
                             socket.emit('normalAttack', receiver.id, 'onDamageReceived', damage, turn, room)
     
-                            await delay(1000);
+                            await delay(800);
     
                             turn === 0 
                                 ? handleDamageReceived(setOpponentCards, receiver.id, damageTaken)  
                                 : handleDamageReceived(setPlayerCards, receiver.id, damageTaken)
 
                             socket.emit('damageReceived', receiver.id, damageTaken, turn, room)
-
-                            console.log(`attack done`)
     
-                            await delay(2500)
+                            await delay(2000)
     
                             turn === 0           
                                 ? handleNormalAttack(setOpponentCards, receiver.id, "", damage)
@@ -173,7 +171,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
 
                             socket.emit('skillChargeUpdate', attacker, turn, room)
     
-                            await delay(2000)
+                            await delay(500)
     
                             //card death check
                             turn === 1
@@ -182,7 +180,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
 
                             socket.emit('cardDeathCheck', turn, room)
     
-                            await delay(1500)
+                            await delay(1000)
             
                             setRound(round => turn === 0 ? round : round + 1)
                             socket.emit('round', round, room)
@@ -203,7 +201,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
                             socket.emit('setInSequence', true, room)
                             // console.log(`${attacker?.name} is the attacker, ${receiver?.name} is the reciever`)
     
-                            await delay(300)
+                            await delay(200)
     
                             turn === 1 
                                 ? updateSkillCharge(setOpponentCards, attacker, 2)
@@ -212,7 +210,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
 
                             socket.emit('updateSkillChargeActive', attacker, 2, turn, room)
     
-                            await delay(800)
+                            await delay(600)
     
                             turn === 1 
                                 ? updateSkillCharge(setOpponentCards, attacker, 1)  
@@ -221,7 +219,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
 
                             socket.emit('updateSkillChargeActive', attacker, 1, turn, room)
     
-                            await delay(800)
+                            await delay(600)
     
                             turn === 1 
                                 ? updateSkillCharge(setOpponentCards, attacker, 0) 
@@ -230,40 +228,39 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
 
                             socket.emit('updateSkillChargeActive', attacker, 0, turn, room)
     
-                            await delay(800)
+                            await delay(500)
                             
                             turn === 0 
                                 ? setPlayerAnimation({ state: true, id: attacker?.id, name: "skill-animation" })
                                 : setOpponentAnimation({ state: true, id: attacker?.id, name: "skill-animation" })
 
                             socket.emit('animation', { state: true, id: attacker?.id, name: "skill-animation" }, turn, room)
-                            await delay(5000);
-    
-                            turn === 0 
-                                ? setPlayerAnimation({ state: false, id: 0, name: "" })
-                                : setOpponentAnimation({ state: false, id: 0, name: "" })
-                            
-                            socket.emit('animation', { state: false, id: 0, name: "" }, turn, room)
-                            await delay(700);
+                            await delay(4000);
     
                             turn === 0 
                                 ? activeSkills(setPlayerCards, setOpponentCards, playerCards, opponentCards, attacker, receiver, round, setPlayerEffects, setOpponentEffects)
                                 : activeSkills(setOpponentCards, setPlayerCards, opponentCards, playerCards, attacker, receiver, round, setOpponentEffects, setPlayerEffects)
     
                             socket.emit('activeSkill', playerCards, opponentCards, attacker, receiver, round, turn, room)
-                            await delay(5000)
+                            await delay(1000);
+                            
+                            turn === 0 
+                                ? setPlayerAnimation({ state: false, id: 0, name: "" })
+                                : setOpponentAnimation({ state: false, id: 0, name: "" })
+                            
+                            socket.emit('animation', { state: false, id: 0, name: "" }, turn, room)
     
-                            console.log(`attack done`)
+                            await delay(2000)
     
                             //card death check
-                            turn === 1
-                                ? checkCardDeath(setPlayerCards)
-                                : checkCardDeath(setOpponentCards)
-                            socket.emit('cardDeathCheck', turn, room)
+                            checkCardDeath(setPlayerCards)
+                            checkCardDeath(setOpponentCards)
+                            socket.emit('cardDeathCheck', 0, room)
+                            socket.emit('cardDeathCheck', 1, room)
     
                             setRound(round => turn === 0 ? round : round + 1)
                             socket.emit('round', round, room)
-                            await delay(1500)
+                            await delay(1000)
                             setTurn(turn === 0 ? 1 : 0)
                             socket.emit('changeTurn', turn, room)
                             setInSequence(false)
@@ -280,17 +277,14 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
 
     useEffect(() => {
         socket.on('setSequence', (turn, mode, index) => {
-            console.log('setSequence socket')
             setSequence({turn, mode, index})
           })
 
         socket.on('updateInSequence', inSequence => {
-            // console.log('updateInSequence', inSequence)
             setInSequence(inSequence)
         })
 
         socket.on('setAnimation', (attackAnimation, turn) => {
-            // console.log('setplayeranimation', isReferee, attackAnimation)
             turn === 0
                 ? setPlayerAnimation(attackAnimation)
                 : setOpponentAnimation(attackAnimation)

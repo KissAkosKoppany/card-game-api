@@ -1,11 +1,12 @@
 import React from 'react'
+
 import { Link } from 'react-router-dom'
-import Card from '../../../../../Components/Card/Card'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { setOpponentBattleCards } from '../../../../../store/cards/cards.action'
 import { setBattleEnd } from '../../../../../store/battle/battle.action'
+import { setOpponentBattleCards } from '../../../../../store/cards/cards.action'
 
+import Card from '../../../../../Components/Card/Card'
 
 const StagePreview = ({ stage, setBattleMode }) => {
 

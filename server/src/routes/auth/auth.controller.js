@@ -5,13 +5,13 @@ async function redirectAfterLogin(req, res) {
     //     secure: false,
     // })
     // res.redirect('https://ascendedbattle.com')
-    res.redirect('https://ec2-16-171-139-106.eu-north-1.compute.amazonaws.com:8000')
+    res.redirect('https://www.ascendedbattle.com:8000')
 }
 
 async function logoutUser(req, res) {
     req.logout();
     // res.redirect('https://ascendedbattle.com')
-    res.redirect('https://ec2-16-171-139-106.eu-north-1.compute.amazonaws.com:8000')
+    res.redirect('https://www.ascendedbattle.com:8000')
 }
 
 module.exports = {

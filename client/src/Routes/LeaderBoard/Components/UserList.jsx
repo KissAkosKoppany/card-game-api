@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
-import UserActionButtons from './UserActionButtons'
+
 import { httpGetPlayerInfo } from '../../../hooks/requests'
+
 import ProfileDashBoard from '../../UserInfromation/ProfileDashBoard'
+import UserActionButtons from './UserActionButtons'
+
+import { soundEffects } from '../../../SoundEffects/soundEffects'
 import { GiCrossMark, GiBossKey, GiShurikenAperture } from 'react-icons/gi'
 
 const UserList = ({ users, mode, socket }) => {
@@ -10,6 +14,7 @@ const UserList = ({ users, mode, socket }) => {
     const [player, setPlayer] = useState(null)
 
     const openPlayerInfo = async(id) => {
+        soundEffects.accept.play()
         const playerInfo = await httpGetPlayerInfo(id)
         setPlayer(playerInfo)
         setShowModal(true)
@@ -52,7 +57,7 @@ const UserList = ({ users, mode, socket }) => {
             {
                 showModal
                     ? <div className='profile-modal'>
-                        <button onClick={() => setShowModal(false)} className="modal-close-button"><GiCrossMark /></button>
+                        <button onClick={() => {setShowModal(false); soundEffects.navButton.play()}} className="modal-close-button"><GiCrossMark /></button>
                         <ProfileDashBoard currentUser={player} />
                       </div>
                     : null

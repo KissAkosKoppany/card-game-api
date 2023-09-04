@@ -1,15 +1,19 @@
 import React, { useRef } from 'react';
-import './Card.css';
+
+import { useCardDeath } from '../../GameInterface/Components/Hooks/useCardDeath';
+
+import CardName from './Components/CardName';
+import CardImage from './Components/CardImage';
+import CardDoTCover from './Components/BattleStyle/CardDoTCover';
 import CardStatList from './Components/StatStyle/CardStatList';
 import CardBackground from './Components/CardBackground';
 import CardBattleStyle from './Components/BattleStyle/CardBattleStyle';
 import CardActionCover from './Components/BattleStyle/CardActionCover';
-import CardImage from './Components/CardImage';
-import CardName from './Components/CardName';
 import CardEffectIconsBar from './Components/BattleStyle/CardEffectIconsBar';
-import { useCardDeath } from '../../GameInterface/Components/Hooks/useCardDeath';
-import CardDoTCover from './Components/BattleStyle/CardDoTCover';
+
 import { GiCardPlay } from 'react-icons/gi'
+
+import './Card.css';
 
 const Card = ({ card, cardStyle, round, opponent, room, pvp, isReferee, turn, inSequence, handleSetSequence, playerAnimation, i, position, socket }) => {
 

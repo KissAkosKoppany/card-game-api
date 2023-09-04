@@ -1,10 +1,13 @@
 import React from 'react'
-import './Pvp.style.css'
+
 import { Routes, Route } from 'react-router-dom'
-import PvpOnlinePlayers from './Components/PvpOnlinePlayers'
-import PvpCardSelect from './Components/PvpCardSelect'
-import PvpWaitingForOpponent from './Components/PvpWaitingForOpponent'
+
 import PvpBattle from './Components/PvpBattle'
+import PvpCardSelect from './Components/PvpCardSelect'
+import PvpOnlinePlayers from './Components/PvpOnlinePlayers'
+import PvpWaitingForOpponent from './Components/PvpWaitingForOpponent'
+
+import './Pvp.style.css'
 
 const PvP = ({ socket, battleMode, setBattleMode }) => {
 

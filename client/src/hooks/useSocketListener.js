@@ -8,9 +8,6 @@ export const useSocketListener = (socket, setBattleMode) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const refereeId = useSelector(state => state.rootReducer.pvp.pvpReferee)
-    // const currentUser = useSelector(state => state.rootReducer.user.currentUser)
-    // console.log(refereeId, 'usesocketlistener')
 
     useEffect(() => {
         if(socket) {
@@ -21,7 +18,6 @@ export const useSocketListener = (socket, setBattleMode) => {
                 setBattleMode(true)
             })
             socket.on('setCards', (cards, isReferee) => {
-                console.log('firstplayercards',cards)
                 if(!isReferee) {
                     dispatch(setOpponentBattleCards(cards))
                 } else {
@@ -29,12 +25,9 @@ export const useSocketListener = (socket, setBattleMode) => {
                 }
             })
             socket.on('startBattle', (cards, isReferee) => {
-                console.log('startbattlecards', cards)
                 if(isReferee) {
-                    console.log('startbattlerefere', cards)
                     dispatch(setPlayerBattleCards(cards))
                 } else {
-                    console.log('startbattleNooootreferee', cards)
                     dispatch(setOpponentBattleCards(cards))
                 }
                 navigate('/fight/pvp/battle')

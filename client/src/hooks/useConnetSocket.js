@@ -7,7 +7,8 @@ export const useConnectSocket = (user, socket) => {
             socket.on('connect', () => {
                 console.log('connect frontend')
             })
-        } 
+        }
+        // eslint-disable-next-line
     }, [user])
 
     useEffect(() => {

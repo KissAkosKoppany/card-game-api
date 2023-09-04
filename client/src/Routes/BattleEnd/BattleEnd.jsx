@@ -1,8 +1,11 @@
 import React from 'react'
-import './BattleEnd.style.css'
-import BattleEndStoryMode from './Components/BattleEndStoryMode'
-import BattleEndPvP from './Components/BattleEndPvP'
+
 import { useSelector } from 'react-redux'
+
+import BattleEndPvP from './Components/BattleEndPvP'
+import BattleEndStoryMode from './Components/BattleEndStoryMode'
+
+import './BattleEnd.style.css'
 
 const BattleEnd = ({ setBattleMode }) => {
 

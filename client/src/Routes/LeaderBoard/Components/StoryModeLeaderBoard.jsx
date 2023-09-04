@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import UserList from './UserList';
+import React, { useCallback, useEffect, useState } from 'react'
+
 import { useSelector } from 'react-redux';
+
+import UserList from './UserList';
 
 const StoryModeLeaderBoard = () => {
 
@@ -8,9 +10,13 @@ const StoryModeLeaderBoard = () => {
 
     const [usersList, setUsersList] = useState(users.sort((a,b) => b.currentStageStoryMode - a.currentStageStoryMode))
 
+    const handleUsers = useCallback(() => {
+      setUsersList(users.sort((a,b) => b.currentStageStoryMode - a.currentStageStoryMode))
+    }, [users])
+
     useEffect(() => {
-        setUsersList(users.sort((a,b) => b.currentStageStoryMode - a.currentStageStoryMode))
-    })
+      handleUsers()
+    }, [handleUsers])
 
   return (
     <div className='friends-wrapper'>

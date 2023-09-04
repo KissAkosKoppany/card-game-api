@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import './RequestsModal.style.css'
+
 import BattleRequest from './Components/BattleRequest'
+
+import { soundEffects } from '../../SoundEffects/soundEffects'
+
+import './RequestsModal.style.css'
 
 const RequestsModal = ({ socket }) => {
 
@@ -9,6 +13,7 @@ const RequestsModal = ({ socket }) => {
     useEffect(() => {
         if(socket) {
             socket.on('battleRequest', (sender, room) => {
+                soundEffects.request.play()
                 setBattleRequests(requests => [...requests, {
                     id: sender.id,
                     image: sender.image,

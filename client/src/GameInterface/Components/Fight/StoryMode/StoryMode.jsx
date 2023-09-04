@@ -1,15 +1,13 @@
 import React from 'react'
+
 import { Routes, Route } from 'react-router-dom'
+
 import StageOne from './Stages/StageOne'
-import StagesContainer from './Container/StagesContainer'
 import CardSelect from './Container/CardSelect'
+import StagesContainer from './Container/StagesContainer'
 
 const StoryMode = ({ setBattleMode }) => {
-
-  // useEffect(() => {
-  //   setBattleMode(false)
-  // }, [])
-
+  
   return (
     <div>
       <Routes>

@@ -5,12 +5,8 @@ function listen(io) {
     let clients = {}
     let rooms = {}
     io.on('connect', async(socket) => {
-        console.log('user connected')
-
-        
         
         const userId = socket.handshake.auth.token
-        console.log(userId)
         
         if(userId) {
             clients[userId] = socket.id
@@ -25,7 +21,6 @@ function listen(io) {
         
 
         socket.on('disconnect', async() => {
-            console.log('user disconected')
             if(userId) {
                 await users.updateOne( { id: userId }, {
                     isOnline: false
@@ -40,7 +35,6 @@ function listen(io) {
         socket.on('sendRequest', (userId, sender) => {
             let room = clients[userId]
             rooms[room] = 0
-            // console.log('sender:', sender.id, '..userId:', userId)
             socket.to(room).emit('battleRequest', sender, room)
             socket.join(room)
         })
@@ -71,7 +65,6 @@ function listen(io) {
         })
 
         socket.on('animation', (attackAnimation, turn, room) => {
-            // console.log('playeranimation', attackAnimation)
             socket.to(room).emit('setAnimation', attackAnimation, turn)
         })
 
@@ -116,7 +109,6 @@ function listen(io) {
         })
 
         socket.on('skillVideo', (cardId, room) => {
-            // console.log('video', cardId)
             io.in(room).emit('playSkillVideo', cardId)
         })
 
@@ -127,8 +119,6 @@ function listen(io) {
         socket.on('handleEffects', (playerEffects, opponentEffects, round, room) => {
             socket.to(room).emit('setEffects', playerEffects, opponentEffects, round)
         })
-
-        console.log("clients",clients)
     })
 }
 

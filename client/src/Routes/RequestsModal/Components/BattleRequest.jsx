@@ -1,27 +1,30 @@
 import React from 'react'
-import { GiCrossedSwords } from 'react-icons/gi'
-import { useDispatch, useSelector } from 'react-redux'
-import { setPvpReferee } from '../../../store/pvp/pvp.action'
+
 import { setPvpPlayers } from '../../../store/battle/battle.action'
+import { setPvpReferee } from '../../../store/pvp/pvp.action'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { soundEffects } from '../../../SoundEffects/soundEffects'
+import { GiCrossedSwords } from 'react-icons/gi'
 
 const BattleRequest = ({ request, socket, clearRequest }) => {
 
   const dispatch = useDispatch()
 
   const currentUser = useSelector(state => state.rootReducer.user.currentUser)
-  console.log('request for sendername',request)
 
   const acceptBattle = () => {
+    soundEffects.accept.play()
     socket.emit('battleRequestAccepted', request.room, request.id)
     dispatch(setPvpReferee(request.id))
     dispatch(setPvpPlayers({
       playerName: currentUser.username,
       opponentName: request.username
     }))
-
   }
 
   const rejectBattle = () => {
+    soundEffects.decline.play()
     socket.emit('battleRejected', request.room)
   }
 

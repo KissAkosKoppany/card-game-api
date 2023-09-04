@@ -426,14 +426,16 @@
     background-color: rgba(var(--clr-bg-main), .1);
     position: absolute;
     z-index: 0;
-    transition: background-color 600ms ease-in-out, z-index 1s;
+    /* 600 1s*/
+    transition: background-color 400ms ease-in-out, z-index 800ms;
 }
 
 .card-action-cover.onDamageReceived,
 .card-action-cover.onHealReceived {
     background-color: rgba(var(--clr-bg-main), .3);
     z-index: 9999;
-    transition: background-color 600ms ease-in-out, z-index 0s;
+    /* 600 0s*/
+    transition: background-color 400ms ease-in-out, z-index 0s;
 }
 
 .card-action-cover.onStun {
@@ -446,7 +448,8 @@
     background-color: rgba(var(--clr-bg-main), .8);
     clip-path: var(--polygon-card-cover);
     opacity: 0;
-    transition: opacity 1s ease-out;
+    /* 1s */
+    transition: opacity 800ms ease-out;
 }
 
 .card-action-cover-bg.onStun {
@@ -461,7 +464,8 @@
     inset: 0;
     margin: auto;
     clip-path: var(--polygon-octagon-bg);
-    transition: height 500ms ease-in-out, width 500ms ease-in-out 500ms;
+    /* 500 */
+    transition: height 300ms ease-in-out, width 300ms ease-in-out 300ms;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -470,7 +474,8 @@
 .card-action-container.onStun {
     width: 55%;
     height: 27%;
-    transition: height 500ms ease-in-out 500ms, width 500ms ease-in-out;
+    /* 500 */
+    transition: height 300ms ease-in-out 300ms, width 300ms ease-in-out;
 }
 
 .card-action-container.onDamageReceived,
@@ -478,7 +483,8 @@
  {
     width: 90%;
     height: 27%;
-    transition: height 500ms ease-in-out 350ms, width 500ms ease-in-out;
+    /* 500 350 500 */
+    transition: height 300ms ease-in-out 250ms, width 300ms ease-in-out;
 }
 
 .card-action-icon.onStun.onDamageReceived,
@@ -512,7 +518,8 @@
 .card-action-text.onDamageReceived,
 .card-action-text.onHealReceived {
     opacity: 1;
-    transition: opacity 100ms ease-in-out 800ms;
+    /* 100 800 */
+    transition: opacity 100ms ease-in-out 600ms;
 }
 
 .card-action-text.onHealReceived {
@@ -539,7 +546,8 @@
 
 .card-action-icon.onStun {
     opacity: 1;
-    transition: opacity 100ms ease-in-out 1s;
+    /* 100 1s */
+    transition: opacity 100ms ease-in-out 800ms;
 }
 
 /* Card Action cover style END */
@@ -554,7 +562,8 @@
 }
 
 .card-container.down.atk-animation {
-    animation: atk-animation 700ms ease-in;
+    /* 700 */
+    animation: atk-animation 500ms ease-in;
 }
 
 @keyframes atk-animation-opponent {
@@ -565,7 +574,8 @@
 }
 
 .card-container.up.atk-animation {
-    animation: atk-animation-opponent 700ms ease-in;
+    /* 700 */
+    animation: atk-animation-opponent 500ms ease-in;
 }
 
 @keyframes damage-taken {
@@ -575,22 +585,26 @@
 }
 
 .card-container.dmg-take {
-    animation: damage-taken 500ms ease-in-out;
+    /* 500 */
+    animation: damage-taken 300ms ease-in-out;
 }
 
 .img-container.skill-animation {
     transform: scaleX(1.5) scaleY(1.2);
-    transition: all 500ms linear;
+    /* 500 */
+    transition: all 300ms linear;
 }
 
 .card-skill-video {
     opacity: 0;
-    transition: all 500ms linear;
+    /* 500 */
+    transition: all 300ms linear;
 }
 
 .card-skill-video.skill-animation {
     opacity: 1;
-    transition: all 500ms linear;
+    /* 500 */
+    transition: all 300ms linear;
 }
 
 .card-container.card-death {

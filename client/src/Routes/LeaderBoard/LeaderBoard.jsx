@@ -1,12 +1,14 @@
 import React from 'react'
-import SecondaryNav from '../../Components/SecondaryNav/SecondaryNav'
-import { Route, Routes } from 'react-router-dom'
-import PvPLeaderBoard from './Components/PvPLeaderBoard'
 
-import './LeaderBoard.style.css'
+import { Route, Routes } from 'react-router-dom'
+
+import SecondaryNav from '../../Components/SecondaryNav/SecondaryNav'
+import PvPLeaderBoard from './Components/PvPLeaderBoard'
 import StoryModeLeaderBoard from './Components/StoryModeLeaderBoard'
 
-const LeaderBoard = ({ socket }) => {
+import './LeaderBoard.style.css'
+
+const LeaderBoard = () => {
 
     let links = [
         {

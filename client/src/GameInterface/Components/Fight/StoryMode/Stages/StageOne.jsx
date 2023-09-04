@@ -19,7 +19,7 @@ const StageOne = ({ setBattleMode }) => {
       round,
       setSequence,
       sequence,
-  } = useBattleSequence(currentUser.id, setBattleMode)
+  } = useBattleSequence(currentUser?.id, setBattleMode)
 
   const handleSetSequence = (mode, index, card) => {
     if (turn === 0 && !inSequence && card?.skillCharge === card?.skillCount && card?.sakuraSilence !== true) {

@@ -1,8 +1,10 @@
 import React from 'react'
-import { GiCrossedSwords, GiBoltEye } from 'react-icons/gi'
 
-import { useDispatch, useSelector } from 'react-redux'
 import { setPvpPlayers } from '../../../store/battle/battle.action'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { soundEffects } from '../../../SoundEffects/soundEffects'
+import { GiCrossedSwords, GiBoltEye } from 'react-icons/gi'
 
 const UserActionButtons = ({ user, mode, socket, openPlayerInfo }) => {
 
@@ -16,6 +18,7 @@ const UserActionButtons = ({ user, mode, socket, openPlayerInfo }) => {
       playerName: currentUser.username,
       opponentName: user.username
     }))
+    soundEffects.success.play()
   }
 
   return (

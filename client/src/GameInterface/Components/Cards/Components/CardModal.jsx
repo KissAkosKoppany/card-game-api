@@ -1,13 +1,16 @@
 import React from 'react'
+
 import Card from '../../../../Components/Card/Card'
 import CardModalStats from './CardModalStats'
+
 import { GiCrossMark } from 'react-icons/gi'
+import { soundEffects } from '../../../../SoundEffects/soundEffects'
 
 const CardModal = ({ card, setShowCardModal }) => {
   return (
     <div className='card-modal-wrapper'>
         <div className={`card-modal-container`}>
-            <button onClick={() => setShowCardModal(false)} className="card-modal-close-button"><GiCrossMark /></button>
+            <button onClick={() => {setShowCardModal(false); soundEffects.navButton.play()}} className="card-modal-close-button"><GiCrossMark /></button>
             <Card card={card} opponent={true} cardStyle="statList modal" />
             <div className={`card-modal-info-container ${card?.theme}`}>
                 <div className="card-modal-info-bg"></div>

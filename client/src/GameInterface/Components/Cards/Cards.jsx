@@ -1,12 +1,12 @@
 import React from 'react';
-import './Cards.css';
 import { Routes, Route } from 'react-router-dom';
-import SecondaryNav from '../../../Components/SecondaryNav/SecondaryNav';
-import AllCards from './Containers/AllCards';
-import MyCards from './Containers/MyCards';
-// import { CardContext } from '../../../contexts/card.context'
+
 import { useSelector } from 'react-redux';
 
+import AllCards from './Containers/AllCards';
+import SecondaryNav from '../../../Components/SecondaryNav/SecondaryNav';
+
+import './Cards.css';
 
 const Cards = () => {
 
@@ -24,11 +24,6 @@ const Cards = () => {
       name: "Boss Cards",
       border: "border-none"
     },
-    {
-      to: "/cards/my-cards",
-      name: "My Cards",
-      border: "border-none"
-    }
   ]
 
   return (
@@ -40,7 +35,6 @@ const Cards = () => {
             <Routes>
               <Route path='/' element={<AllCards cards={cards} />} />
               <Route path='boss-cards' element={<AllCards cards={bossCards} />} />
-              <Route path='my-cards' element={<MyCards />} />
             </Routes>
           </div>
         </div>

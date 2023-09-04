@@ -12,5 +12,12 @@ export const soundEffects = {
     burn: new Audio('soundEffects/burn.mp3'),
     bleed: new Audio('soundEffects/bleed.mp3'),
     poison: new Audio('soundEffects/poison.mp3'),
-    heal: new Audio('soundEffects/heal.mp3')
+    heal: new Audio('soundEffects/heal.mp3'),
+    accept: new Audio('soundEffects/accept.mp3'),
+    decline: new Audio('soundEffects/decline.mp3'),
+    fail: new Audio('soundEffects/fail.mp3'),
+    navButton: new Audio('soundEffects/navButton.mp3'),
+    request: new Audio('soundEffects/request.mp3'),
+    select: new Audio('soundEffects/select.mp3'),
+    success: new Audio('soundEffects/success.mp3'),
 }

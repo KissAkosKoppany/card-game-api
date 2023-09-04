@@ -1,15 +1,14 @@
 import React from 'react';
-import './Fight.css';
+
 import { Routes, Route } from 'react-router-dom';
+
+import PvP from './Pvp/PvP';
+import StoryMode from './StoryMode/StoryMode';
 import SecondaryNav from '../../../Components/SecondaryNav/SecondaryNav';
 
-import StoryMode from './StoryMode/StoryMode';
-import PvP from './Pvp/PvP';
-// import { useStages } from '../../../hooks/useStages';
+import './Fight.css';
 
 const Fight = ({ battleMode, setBattleMode, socket }) => {
-
-  // const { stages } = useStages()
 
   let links = [
     {

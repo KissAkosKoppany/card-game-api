@@ -1,7 +1,10 @@
 import React from 'react';
-import './ProfileInfo.css'
-import ProfileDashBoard from './ProfileDashBoard';
+
 import { useSelector } from 'react-redux';
+
+import ProfileDashBoard from './ProfileDashBoard';
+
+import './ProfileInfo.css'
 
 const ProfileInfo = () => {
 

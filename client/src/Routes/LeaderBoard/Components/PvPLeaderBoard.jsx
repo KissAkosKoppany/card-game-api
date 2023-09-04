@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import UserList from './UserList'
+import React, { useCallback, useEffect, useState } from 'react'
+
 import { useSelector } from 'react-redux'
+
+import UserList from './UserList'
 
 const PvPLeaderBoard = () => {
 
@@ -8,9 +10,13 @@ const PvPLeaderBoard = () => {
 
     const [usersList, setUsersList] = useState(users.sort((a,b) => b.pvpPoints - a.pvpPoints))
 
+    const handleUsers = useCallback(() => {
+      setUsersList(users.sort((a,b) => b - a))
+    }, [users])
+
     useEffect(() => {
-        setUsersList(users.sort((a,b) => b - a))
-    }, [])
+      handleUsers()
+    }, [handleUsers])
 
   return (
     <div className='friends-wrapper'>
