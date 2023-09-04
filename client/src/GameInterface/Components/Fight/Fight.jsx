@@ -7,8 +7,9 @@ import StoryMode from './StoryMode/StoryMode';
 import SecondaryNav from '../../../Components/SecondaryNav/SecondaryNav';
 
 import './Fight.css';
+import NoAccess from '../../../Components/NoAccess/NoAccess';
 
-const Fight = ({ battleMode, setBattleMode, socket }) => {
+const Fight = ({ battleMode, setBattleMode, socket, currentUser }) => {
 
   let links = [
     {
@@ -30,8 +31,18 @@ const Fight = ({ battleMode, setBattleMode, socket }) => {
           <SecondaryNav links={links} battleMode={battleMode} />
           <div className={`game-content-container ${battleMode ? "battle-mode" : ""}`}>
           <Routes>
-              <Route path='story-mode/*' element={<StoryMode setBattleMode={setBattleMode} />}/>
-              <Route path='pvp/*' element={<PvP setBattleMode={setBattleMode} battleMode={battleMode} socket={socket} />}/>
+              <Route path='story-mode/*' element={
+                currentUser 
+                  ? <StoryMode setBattleMode={setBattleMode} />
+                  : <NoAccess />
+                }
+              />
+              <Route path='pvp/*' element={
+                currentUser
+                ? <PvP setBattleMode={setBattleMode} battleMode={battleMode} socket={socket} />
+                : <NoAccess />
+                }
+              />
           </Routes>
           </div>
         </div>

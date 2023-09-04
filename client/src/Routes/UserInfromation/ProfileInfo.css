@@ -9,17 +9,19 @@
 
 .user-info {
     background-color: rgba(var(--clr-bg-main), .95);
-    width: 500px;
+    min-width: 500px;
     height: 120px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     clip-path: var(--polygon-user-bar);
+    padding: 0 var(--spacer-700);
 }
 
 .user-image {
     height: 70%;
     aspect-ratio: 1/1;
+    margin-right: 10px;
 }
 
 .user-image img {
@@ -29,13 +31,13 @@
     border-radius: 50%;
 }
 
-.user-info h1 {
-    font-family: var(--font-bold);
+.user-info > p {
+    font-family: var(--font-futuristic);
     font-size: var(--font-size-500);
     text-shadow: 1px 1px 3px rgba(var(--clr-bg-secondary));
 }
 
-.user-info h1 span {
+.user-info p span {
     font-size: var(--font-size-200);
     margin-left: 10px;
     cursor: pointer;
@@ -69,9 +71,9 @@
     background-color: rgba(var(--clr-bg-main), .8);
 }
 
-.battle-statistics h2 {
+.battle-statistics > p {
     text-align: center;
-    font-family: var(--font-bold);
+    font-family: var(--font-futuristic);
     font-size: var(--font-size-500);
     margin: 0 0 var(--spacer-300);
 }
@@ -93,7 +95,13 @@
     align-items: flex-start;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
+    .battle-info p {
+        font-size: var(--font-size-200);
+    }
+}
+
+@media (max-width: 1450px) {
     .battle-info {
         width: 90%;
     }
@@ -101,7 +109,7 @@
 
 @media (min-width: 1600px) {
     .battle-info-container {
-        width: 60%;
+        width: 80%;
     }
 }
 

@@ -77,7 +77,6 @@
 
 .request-sender-info p {
     font-size: var(--font-size-300);
-    font-family: var(--font-bold);
     margin: 0;
 }
 
@@ -93,7 +92,6 @@
     border: 1px solid rgba(var(--clr-bg-red));
     padding: var(--spacer-100) var(--spacer-200);
     color: rgba(var(--clr-text-highlight));
-    font-family: var(--font-bold);
     cursor: pointer;
     border-radius: 2px;
 }

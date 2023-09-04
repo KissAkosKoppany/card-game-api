@@ -1,0 +1,21 @@
+.no-access-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-500);
+}
+
+.no-access-container p {
+    text-align: center;
+    background-color: rgba(var(--clr-bg-main), .9);
+    padding: var(--spacer-700) var(--spacer-500);
+    /* text-transform: uppercase; */
+    width: 80%;
+    margin: 0;
+    clip-path: var(--polygon-turn-indicator);
+    border: 2px solid rgba(var(--clr-bg-red), .8);
+    color: rgba(var(--clr-primary-text), .7);
+    font-family: var(--font-futuristic);
+}

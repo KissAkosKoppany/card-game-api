@@ -29,6 +29,7 @@
     list-style: none;
     padding: 2px;
     cursor: pointer;
+    font-family: var(--font-futuristic);
 }
 
 .profile-nav {
@@ -47,6 +48,7 @@
 .profile-nav-user-name {
     color: rgba(var(--clr-bg-highlight));
     text-transform: uppercase;
+    font-family: var(--font-futuristic);
 }
 
 .profile-nav-decor {
@@ -63,7 +65,7 @@
 
 .profile-nav-decor.line.left {
     width: 3px;
-    height: 50%;
+    height: 40%;
     left: 0;
     top: 27px;
 }
@@ -76,8 +78,8 @@
 }
 
 .profile-nav-decor.line.right {
-    width: 2px;
-    height: 50%;
+    width: 3px;
+    height: 40%;
     right: 0;
     bottom: 27px;
 }
@@ -97,4 +99,16 @@
     right: 0;
     bottom: 0;  
     rotate: 180deg;
+}
+
+@media (max-width: 1100px) {
+    .profile-nav-dropdown {
+        right: -40px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .profile-nav-dropdown {
+        right: 0;
+    }
 }

@@ -55,8 +55,6 @@
     margin: 0;
     width: 90%;
     text-align: center;
-    text-transform: uppercase;
-    font-family: var(--font-bold);
     font-size: var(--font-size-500);
 }
 
@@ -105,6 +103,7 @@
 
 .card-modal-skill p {
     font-size: var(--font-size-300);
+    font-family: var(--font-light);
 }
 
 .card-modal-skill-description {

@@ -37,7 +37,7 @@ const App = () => {
 
   useEffect(() => {
     //need to change this link to backand link
-    const sockett = user ? io('https://www.ascendedbattle.com:8000', {
+    const sockett = user ? io('https://localhost:8000', {
       auth: {
         token: user.id
       }
@@ -60,7 +60,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<NavBar battleMode={battleMode} />}>
             <Route index element={<Home />} />
-            <Route path="fight/*" element={<Fight socket={socket} battleMode={battleMode} setBattleMode={setBattleMode} />} />
+            <Route path="fight/*" element={<Fight currentUser={user} socket={socket} battleMode={battleMode} setBattleMode={setBattleMode} />} />
             <Route path="cards/*" element={<Cards />} />
             <Route path="leaderboard/*" element={<LeaderBoard socket={socket} />} />
             <Route path="user-info" element={<ProfileInfo />} />

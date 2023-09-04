@@ -5,10 +5,11 @@
     line-height: 1px;
     text-align: center;
     cursor: pointer;
-    width: 200px;
+    width: 220px;
     text-transform: uppercase;
     transition: all 0.4s;
     position: relative;
+    font-family: var(--font-futuristic);
 }
 
 .fight-nav .nav-link {
@@ -73,8 +74,9 @@
     border: none;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1000px) {
     .nav-link {
-        width: 170px;
+        width: 180px;
+        font-size: var(--font-size-200);
     }
 }

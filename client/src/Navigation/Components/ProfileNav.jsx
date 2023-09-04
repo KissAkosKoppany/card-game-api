@@ -33,12 +33,12 @@ const ProfileNav = () => {
               <Link className='link' to="user-info"><li className='profile-nav-link'>Profile info & battle statistics</li></Link>
             </ul>
             <ul className='nav-group-container'>
-            <a className='link' href='https://www.ascendedbattle.com:8000/api/auth/logout'><li className='profile-nav-link'>Sign Out</li></a>
+            <a className='link' href='https://localhost:8000/api/auth/logout'><li className='profile-nav-link'>Sign Out</li></a>
             </ul>
           </>
           :
           <ul className='nav-group-container'>
-            <a className='link' href='https://www.ascendedbattle.com:8000/api/auth/google'><li className='profile-nav-link'>Sing In</li></a>
+            <a className='link' href='https://localhost:8000/api/auth/google'><li className='profile-nav-link'>Sing In</li></a>
           </ul>         
         }
     </nav>

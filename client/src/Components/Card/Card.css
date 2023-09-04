@@ -236,7 +236,7 @@
 .card-name p {
     font-size: var(--font-size-100);
     padding: 3px 0;
-    font-family: var(--font-bold);
+    font-family: var(--font-futuristic);
 }
 
 .card-name.opponent {

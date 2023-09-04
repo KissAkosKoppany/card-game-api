@@ -21,11 +21,11 @@ const ProfileDashBoard = ({ currentUser }) => {
                 <div className='user-image'>
                     <img alt='profile-avatar' src={currentUser?.image} />
                 </div>
-                <h1>{currentUser?.username}</h1>
+                <p>{currentUser?.username}</p>
             </div>
             <div className='battle-info-container'>
                 <div className='battle-statistics'>
-                    <h2>Story Mode</h2>
+                    <p>Story Mode</p>
                     <div className='battle-info'>
                         <p><span>Current stage: </span><span>{currentUser?.currentStageStoryMode} <GiBossKey /></span></p>
                         <p><span>Battles played: </span><span>{currentUser?.storyModeBattlesPlayed} <GiSwordsPower /></span></p>
@@ -35,7 +35,7 @@ const ProfileDashBoard = ({ currentUser }) => {
                     </div>
                 </div>
                 <div className='battle-statistics'>
-                    <h2>PvP</h2>
+                    <p>PvP</p>
                     <div className='battle-info'>
                         <p><span>Points:</span><span> {currentUser?.pvpPoints} <GiShurikenAperture /></span></p>
                         <p><span>Battles played: </span><span>{currentUser?.pvpBattlesPlayed} <GiSwordsPower /></span></p>

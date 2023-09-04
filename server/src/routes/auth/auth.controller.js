@@ -4,14 +4,14 @@ async function redirectAfterLogin(req, res) {
     //     httpOnly: false,
     //     secure: false,
     // })
-    // res.redirect('https://ascendedbattle.com')
-    res.redirect('https://www.ascendedbattle.com:8000')
+    res.redirect('https://localhost:8000')
+    // res.redirect('https://www.ascendedbattle.com')
 }
 
 async function logoutUser(req, res) {
     req.logout();
-    // res.redirect('https://ascendedbattle.com')
-    res.redirect('https://www.ascendedbattle.com:8000')
+    res.redirect('https://localhost:8000')
+    // res.redirect('https://www.ascendedbattle.com')
 }
 
 module.exports = {

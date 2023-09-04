@@ -2,7 +2,8 @@
 
   --font-bold: 'Bahnschrift SemiBold';
   --font-light: "Bahnschrift Light";
-  /* --font-crit-attack: "optima", sans-serif; */
+  --font-futuristic: 'futuristic';
+  --font-text: "azonix";
 
   --clr-primary-text: 197, 197, 197;
   --clr-text-highlight: 218, 218, 218;
@@ -110,12 +111,23 @@
   --polygon-request: polygon(0 15%, 5% 0, 92% 0, 97% 15%, 97% 83%, 100% 100%, 92% 95%, 5% 95%, 0 80%);
 }
 
+@font-face {
+  font-family: "futuristic";
+  src: url('./../public/fonts/Revamped.otf');
+}
+
+@font-face {
+  font-family: "azonix";
+  src: url('./../public/fonts/Azonix.otf');
+}
+
+
 html, body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   color: rgb(var(--clr-primary-text));
-  font-family: var(--font-light);
+  font-family: var(--font-text);
   height: 100%;
 }
 

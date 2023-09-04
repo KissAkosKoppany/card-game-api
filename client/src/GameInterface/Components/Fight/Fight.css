@@ -70,5 +70,6 @@
 
 .round-indicator p {
     margin: 0;
-    font-size: var(--font-size-500);
+    font-size: var(--font-size-400);
+    font-family: var(--font-futuristic);
 }

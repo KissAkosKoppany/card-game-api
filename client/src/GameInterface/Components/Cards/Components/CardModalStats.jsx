@@ -6,7 +6,7 @@ const CardModalStats = ({ card }) => {
     <div className="card-modal-stat-container">
                     <div className="card-modal-stat">
                         <p>Attack:</p>
-                        <p>{card?.attack} <CardStatIcon statName={card?.type} /></p>
+                        <p>{card?.attack} <CardStatIcon statName={card?.damageType} /></p>
                     </div>
                     <div className="card-modal-stat">
                         <p>Hp:</p>
