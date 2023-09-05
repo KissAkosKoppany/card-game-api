@@ -322,4 +322,113 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
             })
         }
     }
+
+    if(buffs.titanOne) {
+        if (round - buffs.titanOne.fearRound === buffs.titanOne.fearLength) {
+            setOpponentCards(cards => cards.map(card => {
+                if(!card.titanFear) return card
+                    return {...card, titanFear: false}
+            }))
+            setBuffs(buffs => {
+                const {titanOne, ...rest} = buffs;
+                return rest
+            })
+        }
+    }
+
+    if(buffs.titanTwo) {
+        if (round - buffs.titanTwo.bleedRound < buffs.titanTwo.bleedLength) {
+            if(round !== buffs.titanTwo.bleedRound) {
+                setOpponentCards(cards => cards.map(card => {
+                    soundEffects.bleed.play()
+                    let bleedDamage = 600;
+                    let hpAfterPoison = handleHp(card.hp - bleedDamage);
+                    return {...card, hp: hpAfterPoison, action: {animation: "bleed-dmg-take"}}
+                }))
+                await delay(1500)
+                setOpponentCards(cards => cards.map(card => {
+                    return {...card, action: {animation: ""}}
+                }))
+            }
+        } else {
+            setOpponentCards(cards => cards.map(card => {
+                return {...card, titanBleed: false}
+            }))
+            setBuffs(buffs => {
+                const {titanTwo, ...rest} = buffs;
+                return rest
+            })
+        }
+    }
+
+    if(buffs.ryuk) {
+        if (round - buffs.ryuk.silenceRound === buffs.ryuk.silenceLength) {
+            setOpponentCards(cards => cards.map(card => {
+                if(!card.ryukSilence) return card
+                    return {...card, ryukSilence: false}
+            }))
+            setBuffs(buffs => {
+                const {ryuk, ...rest} = buffs;
+                return rest
+            })
+        }
+    }
+
+    if(buffs.misa) {
+        if (round - buffs.misa.buffRound === buffs.misa.buffLength) {
+            setPlayerCards(cards => cards.map(card => {
+                if(!card.misaBuff) return card
+                    else {
+                        const attack = card.attack - 300
+                        const critDamage = card.critDamage - 50
+                        return {...card, misaBuff: false, attack: attack, critDamage: critDamage}
+                    }
+            }))
+            setBuffs(buffs => {
+                const {misa, ...rest} = buffs;
+                return rest
+            })
+        }
+    }
+
+    if(buffs.zeref) {
+        if (round - buffs.zeref.poisonRound < buffs.zeref.poisonLength) {
+            if(round !== buffs.zeref.poisonRound) {
+                setOpponentCards(cards => cards.map(card => {
+                    soundEffects.poison.play()
+                    let poisonDamage = 600;
+                    let hpAfterPoison = handleHp(card.hp - poisonDamage);
+                    return {...card, hp: hpAfterPoison, action: {animation: "poison-dmg-take"}}
+                }))
+                await delay(1500)
+                setOpponentCards(cards => cards.map(card => {
+                    return {...card, action: {animation: ""}}
+                }))
+            }
+        } else {
+            setOpponentCards(cards => cards.map(card => {
+                return {...card, zerefPoison: false}
+            }))
+            setBuffs(buffs => {
+                const {zeref, ...rest} = buffs;
+                return rest
+            })
+        }
+    }
+
+    if(buffs.ichiya) {
+        if (round - buffs.ichiya.buffRound === buffs.ichiya.buffLength) {
+            setPlayerCards(cards => cards.map(card => {
+                if(!card.ichiyaBuff) return card
+                    else {
+                        const attack = card.attack - 500
+                        return {...card, ichiyaBuff: false, attack: attack}
+                    }
+            }))
+            setBuffs(buffs => {
+                const {ichiya, ...rest} = buffs;
+                return rest
+            })
+        }
+    }
 }

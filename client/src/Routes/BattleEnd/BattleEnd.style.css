@@ -18,11 +18,11 @@
     color: rgba(var(--clr-bg-secondary));
 }
 
-.battle-end-title h1 {
+.battle-end-title p {
     font-size: var(--font-size-700);
     margin: 0;
     text-transform: uppercase;
-    font-family: var(--font-bold);
+    font-family: var(--font-futuristic);
     text-shadow: 0 0 8px rgba(var(--clr-bg-highlight), .4);
     color: rgba(var(--clr-bg-highlight));
 }
@@ -43,7 +43,7 @@
 .battle-end-dashboard p {
     margin: 0;
     font-size: var(--font-size-600);
-    font-family: var(--font-bold);
+    font-family: var(--font-text);
     color: rgba(var(--clr-bg-highlight));
 }
 
@@ -67,7 +67,7 @@
     padding: var(--spacer-200) var(--spacer-400);
     font-size: var(--font-size-300);
     color: rgba(var(--clr-bg-main));
-    font-family: var(--font-bold);
+    font-family: var(--font-futuristic);
     cursor: pointer;
     letter-spacing: 0;
     transition: all 200ms linear;

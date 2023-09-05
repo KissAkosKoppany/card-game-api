@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "./static/css/main.ce982232.css",
-    "main.js": "./static/js/main.fd03a467.js",
+    "main.css": "./static/css/main.37840f9d.css",
+    "main.js": "./static/js/main.46896f0a.js",
     "static/media/Revamped.otf": "./static/media/Revamped.fc341b3b7578ed3b3731.otf",
     "static/media/Azonix.otf": "./static/media/Azonix.9091792cb1720a8c6ea0.otf",
     "index.html": "./index.html",
-    "main.ce982232.css.map": "./static/css/main.ce982232.css.map",
-    "main.fd03a467.js.map": "./static/js/main.fd03a467.js.map"
+    "main.37840f9d.css.map": "./static/css/main.37840f9d.css.map",
+    "main.46896f0a.js.map": "./static/js/main.46896f0a.js.map"
   },
   "entrypoints": [
-    "static/css/main.ce982232.css",
-    "static/js/main.fd03a467.js"
+    "static/css/main.37840f9d.css",
+    "static/js/main.46896f0a.js"
   ]
 }

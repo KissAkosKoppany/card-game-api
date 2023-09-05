@@ -5,22 +5,22 @@ const CardEffectIconsBar = ({ card }) => {
   return (
     <div className='effect-icons-container'>
         { //fear
-            card.Luffyfear === true
+            card.Luffyfear === true || card.titanFear === true
                 ? <div className="effect-icon"><GiGhost /></div>
                 : null
         }
         { //silence
-            card.sakuraSilence === true
+            card.sakuraSilence === true || card.ryukSilence === true
                 ? <div className="effect-icon"><GiMute className='icon-silence' /></div>
                 : null
         }
         { //poison
-            card.kanekiPoison === true || card.saikenPoison === true
+            card.kanekiPoison === true || card.saikenPoison === true || card.zerefPoison === true
                 ? <div className="effect-icon"><GiPoisonGas className='icon-poison' /></div>
                 : null
         }
         { //crtit buff
-            card.ayanokoujiBuff === true || card.gintokiBuff === true || card.kanekiBuff === true
+            card.ayanokoujiBuff === true || card.gintokiBuff === true || card.kanekiBuff === true || card.misaBuff === true
                 ? <div className="effect-icon"><GiUpgrade className='effect-sub-icon' /><GiClout className='icon-crit' /></div>
                 : null
         }
@@ -30,7 +30,7 @@ const CardEffectIconsBar = ({ card }) => {
                 : null
         }
         { //attackBuff
-            card.erwinBuff === true || card.gintokiBuff === true || card.kanekiBuff || card.haruhimeBuff === true
+            card.erwinBuff === true || card.gintokiBuff === true || card.kanekiBuff || card.haruhimeBuff === true || card.ichiyaBuff === true || card.misaBuff === true
                 ? <div className="effect-icon"><GiUpgrade className='effect-sub-icon' />
                   {
                     card.damageType === "ad"
@@ -41,7 +41,7 @@ const CardEffectIconsBar = ({ card }) => {
                 : null
         }
         { //bleed
-            card.yunoBleed === true
+            card.yunoBleed === true || card.titanBleed === true
                 ? <div className="effect-icon"><GiBleedingWound className='icon-bleed' /></div>
                 : null
         }

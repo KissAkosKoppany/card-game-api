@@ -295,10 +295,10 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
             break;
         case "Aqua":
             setPlayerCards(cards => cards.map(card => {
-              return {...card, Luffyfear: false, yunoBleed: false, sakuraSilence: false, kanekiPoison: false, saikenPoison: false, kuramaBurn: false}  
+              return {...card, Luffyfear: false, yunoBleed: false, sakuraSilence: false, kanekiPoison: false, saikenPoison: false, kuramaBurn: false, ryukSilence: false, titanFear: false, titanBleed: false, zerefPoison: false}  
             }))
             setOpponentBuffs(buffs => {
-                const {luffy, yuno, sakura, kanekiPoison, kuramaBurnm, saikenPoison, ...rest} = buffs;
+                const {luffy, yuno, sakura, kanekiPoison, kurama, saiken, ryuk, titanOne, titanTwo, zeref, ...rest} = buffs;
                 return rest
             })
             break;

@@ -105,7 +105,7 @@ export const skillChargeUpdate = (setCards, attacker) => {
     let charge = attacker?.skillCharge;
     if (charge === attacker?.skillCount) return 
         setCards(cards => cards.map(card => {
-            if ( card.id !== attacker?.id || card?.stance === "active" || card.Luffyfear === true ) return card
+            if ( card.id !== attacker?.id || card?.stance === "active" || card.Luffyfear === true || card.titanFear === true ) return card
                 soundEffects.activeSkillCharge.play()
                 return {...card, skillCharge: charge + 1}
         }))
@@ -117,7 +117,7 @@ export const checkCardDeath = (setCards) => {
 
 export const skillChargeUpdateAtRoundEnd = (setCards, round) => {
     setCards(cards => cards.map(card => {
-        if (card?.skillCharge === card?.skillCount || card?.stance === "active" || card.Luffyfear === true || round - card?.stunRound < card?.stunLength) return card
+        if (card?.skillCharge === card?.skillCount || card?.stance === "active" || card.Luffyfear === true || card.titanFear === true || round - card?.stunRound < card?.stunLength) return card
             else {
                 let charge = card.skillCharge;
                 return {...card, skillCharge: charge + 1}

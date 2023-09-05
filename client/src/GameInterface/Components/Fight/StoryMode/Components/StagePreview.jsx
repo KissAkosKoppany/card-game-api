@@ -6,12 +6,15 @@ import { useDispatch } from 'react-redux'
 import { setBattleEnd } from '../../../../../store/battle/battle.action'
 import { setOpponentBattleCards } from '../../../../../store/cards/cards.action'
 
+import { GiPadlock } from 'react-icons/gi'
+
 import Card from '../../../../../Components/Card/Card'
 
 const StagePreview = ({ stage, setBattleMode }) => {
 
   const dispatch = useDispatch()
   const bossCards = useSelector((state) => state.rootReducer.cards.bossCards)
+  const currentUser = useSelector(state => state.rootReducer.user.currentUser)
 
   const getSelectedCard = (cardName) => bossCards.filter(card => card.name === cardName)
 
@@ -36,10 +39,13 @@ const StagePreview = ({ stage, setBattleMode }) => {
   }
 
   return (
-    <div onClick={() => {setBattleMode(true); handleBossSelect()}} className="stage-preview-container">
-          {/* this will link to cardSelect...and will set an app state to link to proper stage with onclick*/}
-          <Link className='stage-link' to="/fight/story-mode/card-select"></Link>
-          {/* <img src={stage.img} alt="stage-preview" className="stage-preview-img" /> */}
+    <div className="stage-preview-container">
+          {
+            currentUser.currentStageStoryMode < stage.stageNumber
+              ? <div className="stage-lock"><GiPadlock /></div>
+              : null
+          }
+          <Link onClick={() => {setBattleMode(true); handleBossSelect()}} className='stage-link' to="/fight/story-mode/card-select"></Link>
           <div className="stage-preview-cards-container">
             {
               currentStageCards.map((card, i) => (

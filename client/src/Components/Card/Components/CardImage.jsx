@@ -5,9 +5,7 @@ const CardImage = ({ card, opponent, videoRef, animation, socket }) => {
   useEffect(() => {
     if(socket) {
       socket.on('playSkillVideo', cardId => {
-        console.log(card.name)
         if(cardId === card.id) {
-          console.log('playvideo', videoRef.current)
           setTimeout(() => {
             videoRef.current.play()
             // 2600
@@ -15,6 +13,7 @@ const CardImage = ({ card, opponent, videoRef, animation, socket }) => {
         }
       })
     }
+    // eslint-disable-next-line
   }, [socket])
 
   return (

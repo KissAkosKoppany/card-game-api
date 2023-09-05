@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useLoadUserInfo } from '../../../hooks/useLoadUserInfo'
 import { setOpponentBattleCards } from '../../../store/cards/cards.action'
@@ -10,10 +10,16 @@ import { GiTrophy, GiPartyPopper, GiWilliamTellSkull, GiBossKey } from 'react-ic
 const BattleEndStoryMode = ({ battle, setBattleMode }) => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleOpponentCards = (cards) => {
-        dispatch(setOpponentBattleCards(cards))
-        setBattleMode(true)
+        if(cards.length) {
+            dispatch(setOpponentBattleCards(cards))
+            setBattleMode(true)
+            navigate('/fight/story-mode/card-select')
+        } else {
+            navigate('/fight/story-mode')
+        }
     }
 
     useLoadUserInfo()
@@ -25,12 +31,12 @@ const BattleEndStoryMode = ({ battle, setBattleMode }) => {
                 battle.won
                 ? <>
                     <GiTrophy />
-                    <h1>Victory</h1>
+                    <p>Victory</p>
                     <GiTrophy />
                   </>
                 : <>
                     <GiWilliamTellSkull />
-                    <h1>Defeat</h1>
+                    <p>Defeat</p>
                     <GiWilliamTellSkull />
                   </>
             }
@@ -44,8 +50,8 @@ const BattleEndStoryMode = ({ battle, setBattleMode }) => {
             }
             {
                 battle.won
-                    ? <Link to="/fight/story-mode/card-select"><button onClick={() => handleOpponentCards(battle.nextStageCards)}>Next Stage</button></Link>
-                    : <Link to="/fight/story-mode/card-select"><button onClick={() => handleOpponentCards(battle.currentStageCards)}>Try Again</button></Link>
+                    ? <button onClick={() => handleOpponentCards(battle.nextStageCards)}>Next Stage</button>
+                    : <button onClick={() => handleOpponentCards(battle.currentStageCards)}>Try Again</button>
             }
             
         </div>

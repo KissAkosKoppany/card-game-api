@@ -7,14 +7,11 @@ const CardBattleIcons = ({ card, handleSetSequence, pvp, isReferee, inSequence, 
   const handleVideoPlay = async() => {
     if(!pvp) {
       const video = videoRef.current
-      console.log('in handle video play')
-        if (!inSequence && isReferee && turn === 0 && card?.skillCharge === card?.skillCount && card?.sakuraSilence !== true) {
-          console.log('inside if block', video)
+        if (!inSequence && isReferee && turn === 0 && card?.skillCharge === card?.skillCount && card?.sakuraSilence !== true && card?.ryukSilence !== true) {
           await delay(2600)
           video.play()
         }
-        if (!inSequence && !isReferee && turn === 1 && card?.skillCharge === card?.skillCount && card?.sakuraSilence !== true) {
-          console.log('inside if block', video)
+        if (!inSequence && !isReferee && turn === 1 && card?.skillCharge === card?.skillCount && card?.sakuraSilence !== true && card?.ryukSilence !== true) {
           await delay(2600)
           video.play()
         }

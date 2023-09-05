@@ -19,12 +19,12 @@ const BattleEndPvP = ({ battle }) => {
                 battle.won
                 ? <>
                     <GiTrophy />
-                    <h1>Victory</h1>
+                    <p>Victory</p>
                     <GiTrophy />
                   </>
                 : <>
                     <GiWilliamTellSkull />
-                    <h1>Defeat</h1>
+                    <p>Defeat</p>
                     <GiWilliamTellSkull />
                   </>
             }

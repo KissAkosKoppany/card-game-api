@@ -10,9 +10,11 @@ export const useBattleEndHandlerStoryMode = (playerCards, opponentCards, id, set
     const navigate = useNavigate()
 
     const battleEnd = useSelector(state => state.rootReducer.battle.battleEnd)
+    const currentUser = useSelector(state => state.rootReducer.user.currentUser)
 
     //make with useCallback and update the profile info in database
     const checkBattleEnd = useCallback(async() => {
+        const currentStageNumber = currentUser.currentStageStoryMode > battleEnd.stageNumber ? currentUser.currentStageStoryMode : battleEnd.stageNumber;
         if(!playerCards.length) {
             dispatch(setBattleEnd({
                 mode: 'story',
@@ -23,7 +25,7 @@ export const useBattleEndHandlerStoryMode = (playerCards, opponentCards, id, set
             }))
             await httpUpdateProfileAfterBattle(id, {
                 mode: 'story',
-                stageNumber: battleEnd.stageNumber,
+                stageNumber: currentStageNumber,
                 won: false
             })
             setBattleMode(false)
@@ -31,6 +33,7 @@ export const useBattleEndHandlerStoryMode = (playerCards, opponentCards, id, set
         }
     
         if(!opponentCards.length) {
+            const stageNumber = currentStageNumber === battleEnd.stageNumber ? currentStageNumber + 1 : currentStageNumber
             dispatch(setBattleEnd({
                 mode: 'story',
                 stageNumber: battleEnd.stageNumber,
@@ -40,12 +43,13 @@ export const useBattleEndHandlerStoryMode = (playerCards, opponentCards, id, set
             }))
             await httpUpdateProfileAfterBattle(id, {
                 mode: 'story',
-                stageNumber: battleEnd.stageNumber,
+                stageNumber: stageNumber,
                 won: true
             })
             setBattleMode(false)
             navigate('/battle-end')
         }
+        // eslint-disable-next-line
     }, [playerCards.length, opponentCards.length, dispatch])
 
     useEffect(() => {
@@ -127,6 +131,7 @@ export const useBattleEndHandlerPvP = (playerCards, opponentCards, isReferee, id
                 navigate('/battle-end')
             }
         }
+        // eslint-disable-next-line
     }, [playerCards.length, opponentCards.length, dispatch])
 
     useEffect(() => {
