@@ -1054,6 +1054,13 @@
 
 @media (min-width: 1500px) {
     .card-container.battle {
+        margin: var(--spacer-700) var(--spacer-900);
+    }
+}
+
+@media (min-height: 1200px) and (min-width: 1500px) {
+    .card-container.battle {
+        scale: 1.5;
         margin: var(--spacer-900) var(--spacer-900);
     }
 }

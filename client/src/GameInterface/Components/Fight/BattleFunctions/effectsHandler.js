@@ -1,6 +1,6 @@
 import { soundEffects } from "../../../../SoundEffects/soundEffects";
 import { delay } from "../BattleSequence/helpers";
-import { bleedDamage, handleHeal, handleHp, poisonDamage } from "./battleFunctionHelpers";
+import { bleedDamage, handleHeal, handleHp, poisonDamage, poisonDamage } from "./battleFunctionHelpers";
 
 export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponentCards, round) => {
 
@@ -78,7 +78,7 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
                     if (!card.yunoBleed) return card
                         else {
                             soundEffects.bleed.play()
-                            let damage = bleedDamage(500, card);
+                            let damage = bleedDamage(800, card);
                             let damageTaken = handleHp(card.hp - damage);
                             return {...card, hp: damageTaken, action: {animation: "bleed-dmg-take"}}
                         }
@@ -103,10 +103,9 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
     if (buffs.asuna) {
         if (round - buffs.asuna.buffRound < buffs.asuna.buffLength) {
             if(round !== buffs.asuna.buffRound) {
-                console.log("heal")
                 setPlayerCards(cards => cards.map(card => {
                     soundEffects.heal.play()
-                    let hpAfterHeal = card.hp + 300;
+                    let hpAfterHeal = card.hp + 500;
                     let healValue = handleHeal(hpAfterHeal, card.maxHp)
                     return {...card, hp: healValue}
                 }))
@@ -261,7 +260,7 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
             if(round !== buffs.kurama.burnRound) {
                 setOpponentCards(cards => cards.map(card => {
                     soundEffects.burn.play()
-                    let burnDamage = 200;
+                    let burnDamage = 600;
                     let hpAfterBurn = handleHp(card.hp - burnDamage);
                     return {...card, hp: hpAfterBurn, action: {animation: "burn-dmg-take"}}
                 }))
@@ -303,8 +302,8 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
             if(round !== buffs.saiken.poisonRound) {
                 setOpponentCards(cards => cards.map(card => {
                     soundEffects.poison.play()
-                    let poisonDamage = 200;
-                    let hpAfterPoison = handleHp(card.hp - poisonDamage);
+                    let damage = poisonDamage(700, card);
+                    let hpAfterPoison = handleHp(card.hp - damage);
                     return {...card, hp: hpAfterPoison, action: {animation: "poison-dmg-take"}}
                 }))
                 await delay(1500)
@@ -341,8 +340,8 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
             if(round !== buffs.titanTwo.bleedRound) {
                 setOpponentCards(cards => cards.map(card => {
                     soundEffects.bleed.play()
-                    let bleedDamage = 600;
-                    let hpAfterPoison = handleHp(card.hp - bleedDamage);
+                    let damage = bleedDamage(600, card);
+                    let hpAfterPoison = handleHp(card.hp - damage);
                     return {...card, hp: hpAfterPoison, action: {animation: "bleed-dmg-take"}}
                 }))
                 await delay(1500)
@@ -396,8 +395,8 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
             if(round !== buffs.zeref.poisonRound) {
                 setOpponentCards(cards => cards.map(card => {
                     soundEffects.poison.play()
-                    let poisonDamage = 600;
-                    let hpAfterPoison = handleHp(card.hp - poisonDamage);
+                    let damage = poisonDamage(900, card);
+                    let hpAfterPoison = handleHp(card.hp - damage);
                     return {...card, hp: hpAfterPoison, action: {animation: "poison-dmg-take"}}
                 }))
                 await delay(1500)

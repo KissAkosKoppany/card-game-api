@@ -16,7 +16,7 @@ const SelectedCards = ({ selectedCards, setFightingCards, resetCardSelect, link 
         </div>
         <div className="card-confirmation">
             <button onClick={resetCardSelect} className="card-confirm-button">Select again</button>
-            <Link to={link} ><button onClick={() => setFightingCards(selectedCards)} className="card-confirm-button">To Battle!</button></Link>
+            <Link to={link} ><button onClick={() => setFightingCards(selectedCards)} className="card-confirm-button">To Battle</button></Link>
         </div>
     </>
   )

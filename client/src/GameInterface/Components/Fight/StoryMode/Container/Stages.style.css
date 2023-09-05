@@ -84,13 +84,6 @@
     right: 0;
 }
 
-.turn-indicator {
-    background-color: rgba(var(--clr-blue-dark), .3);
-    border: 3px solid rgba(var(--clr-bg-secondary));
-    clip-path: var(--polygon-turn-indicator);
-    padding: var(--spacer-200) var(--spacer-500);
-}
-
 .stage-lock {
     position: absolute;
     width: 100%;
@@ -101,10 +94,4 @@
     font-size: var(--font-size-700);
     background-color: rgba(var(--clr-bg-main), .4);
     z-index: 9999;
-}
-
-@media (min-height: 1250px) {
-    .turn-indicator {
-        padding: var(--spacer-600) var(--spacer-500);
-    }
 }

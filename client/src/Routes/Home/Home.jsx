@@ -19,19 +19,19 @@ const Home = () => {
                 <div className="patch-notes-bg"></div>
                 <p><span><GiNewspaper /></span>News<span><GiNewspaper /></span></p>
                 <div className="notes-container">
-                  <p>New stages available.</p>
-                  <p>3 new Boss cards.</p>
-                  <p>New game mode: PvP.</p>
+                  <p>New stages available</p>
+                  <p>3 new Boss cards</p>
+                  <p>New game mode: PvP</p>
                   <p className="note-center">PvP info</p>
                   <p>PvP point system:</p>
-                  <p>After every win you get 15 points, plus the number of survived cards times 4.</p>
-                  <p>After every loss you lose 15 points.</p>
+                  <p>After every win you get 15 points, plus the number of survived cards times 4</p>
+                  <p>After every loss you lose 15 points</p>
                   <p>Gameplay:</p>
-                  <p>{`Go to Fight >> PvP and challange an online player.`}</p>
-                  <p>Select your cards and press 'To Battle!.'</p>
-                  <p>Wait for the opponent to select their cards.</p>
+                  <p>{`Go to Fight >> PvP and challange an online player`}</p>
+                  <p>Select your cards and press 'To Battle'</p>
+                  <p>Wait for the opponent to select their cards</p>
                   <p>And let the battle begin!</p>
-                  <p>Always the player who sent the request makes the first attack.</p>
+                  <p>Always the player who sent the request makes the first attack</p>
                 </div>
               </div>
               <div className="patch-notes">
@@ -39,9 +39,17 @@ const Home = () => {
                 <p><span><GiStabbedNote /></span>Patch notes<span><GiStabbedNote /></span></p>
                 <div className="notes-container">
                   <p className="note-center">Bug fixed</p>
-                  <p>Luffy's fear stays on after the duration expires.</p>
+                  <p>Luffy's fear stays on after the duration expires</p>
                   <p className='note-center'>Buffs</p>
-                  <p>Zoro's base attack increased</p>
+                  <p>Roronoa Zoro: base attack increased</p>
+                  <p>Megumin: base attack increased</p>
+                  <p>Levi Ackerman: skill damage increased</p>
+                  <p>Orihime: heal value increased</p>
+                  <p>Erwin Smith: attack buff value increased</p>
+                  <p className="note-center">Nerfs</p>
+                  <p>Luffy: fear duration reduced to 1 round</p>
+                  <p>Megumin: crit damage decreased</p>
+                  <p>Naofumi: resistance buff doesn't apply to himself</p>
                 </div>
               </div>
             </div>

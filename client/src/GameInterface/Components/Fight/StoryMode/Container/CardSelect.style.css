@@ -82,7 +82,7 @@
 .card-confirm-button {
     width: 200px;
     font-size: var(--font-size-300);
-    font-family: var(--font-bold);
+    font-family: var(--font-futuristic);
     padding: var(--spacer-200) 0;
     color: rgba(var(--clr-bg-secondary));
     border: 1px solid rgba(var(--clr-bg-red));

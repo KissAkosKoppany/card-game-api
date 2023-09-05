@@ -32,7 +32,7 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 }}
             })
             const highestAttackCard = playerCards.reduce((prev, current) => (prev.attack > current.attack) ? prev : current)
-            let attackAfterBuff = highestAttackCard.attack + 300
+            let attackAfterBuff = highestAttackCard.attack + 500
             setPlayerCards(cards => 
                 cards.map(card => {
                     if (card.id !== highestAttackCard.id) return card
@@ -265,9 +265,11 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
             break;
         case "Naofumi":
             setPlayerCards(cards => cards.map(card => {
-                let armor = card.armor + 200;
-                let magicResist = card.magicResist + 200;
-                return {...card, armor: armor, magicResist: magicResist, naofumiBuff: true}
+                if(card.id !== attacker.id) {
+                    let armor = card.armor + 200;
+                    let magicResist = card.magicResist + 200;
+                    return {...card, armor: armor, magicResist: magicResist, naofumiBuff: true}
+                } return card
             }))
             setBuffs(buffs => {
                 return {...buffs, naofumi: {
