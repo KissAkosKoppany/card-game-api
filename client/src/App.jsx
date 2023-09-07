@@ -37,7 +37,7 @@ const App = () => {
 
   useEffect(() => {
     //need to change this link to backand link
-    const sockett = user ? io('https://localhost:8000', {
+    const sockett = user ? io('https://www.ascendedbattle.com', {
       auth: {
         token: user.id
       }

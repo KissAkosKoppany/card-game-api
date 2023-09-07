@@ -1,7 +1,7 @@
 const fs = require('fs');
-const https = require('https');
+const https = require('https')
 const mongoose = require('mongoose');
-const io = require('socket.io')
+const io = require('socket.io');
 
 require('dotenv').config();
 
@@ -9,8 +9,11 @@ const app = require('./app')
 const PORT = process.env.PORT || 8000;
 
 const server = https.createServer({
+    rejectUnauthorized: false,
     key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem')
+    cert: fs.readFileSync('cert.pem'),
+    requestCert: false,
+    agent: false,
 }, app)
 
 const socketServer = io(server)

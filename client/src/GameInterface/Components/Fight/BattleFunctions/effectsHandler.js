@@ -1,6 +1,6 @@
 import { soundEffects } from "../../../../SoundEffects/soundEffects";
 import { delay } from "../BattleSequence/helpers";
-import { bleedDamage, handleHeal, handleHp, poisonDamage, poisonDamage } from "./battleFunctionHelpers";
+import { bleedDamage, handleHeal, handleHp, poisonDamage } from "./battleFunctionHelpers";
 
 export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponentCards, round) => {
 
