@@ -9,8 +9,8 @@ const ProfileNav = () => {
 
   const currentUser = useSelector((state) => state.rootReducer.user.currentUser)
 
-  // const link = 'https://www.ascendedbattle.com'
-  const link = 'https://localhost:8000'
+  const link = 'https://www.ascendedbattle.com'
+  // const link = 'https://localhost:8000'
 
   return (
     <nav className='profile-nav-dropdown'>

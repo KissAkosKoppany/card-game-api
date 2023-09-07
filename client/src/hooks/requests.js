@@ -1,7 +1,7 @@
 import { soundEffects } from "../SoundEffects/soundEffects"
 
-// const API_URL = 'https://www.ascendedbattle.com/api';
-const API_URL = 'https://localhost:8000/api';
+const API_URL = 'https://www.ascendedbattle.com/api';
+// const API_URL = 'https://localhost:8000/api';
 
 export async function getUserInfo() {
     try {
