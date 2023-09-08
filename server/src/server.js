@@ -8,13 +8,14 @@ require('dotenv').config();
 const app = require('./app')
 const PORT = process.env.PORT || 8000;
 
+https.globalAgent.options.rejectUnauthorized = false;
+
 const server = https.createServer({
-    rejectUnauthorized: false,
     key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem'),
-    requestCert: false,
-    agent: false,
+    cert: fs.readFileSync('cert.pem')
 }, app)
+
+console.log('test 4')
 
 const socketServer = io(server)
 

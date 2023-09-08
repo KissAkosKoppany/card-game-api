@@ -37,7 +37,7 @@ const App = () => {
 
   useEffect(() => {
     //need to change this link to backand link
-    const sockett = user ? io('https://www.ascendedbattle.com', {
+    const sockett = user ? io('https://www.ascendedcardbattle.com', {
       auth: {
         token: user.id
       }
