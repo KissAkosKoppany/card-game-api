@@ -1,4 +1,4 @@
-const { getAllUsers } = require('./models/users.model')
+const { getAllUsers, getUserInfo } = require('./models/users.model')
 const users = require('./models/users.mongo')
 
 function listen(io) {
@@ -31,6 +31,12 @@ function listen(io) {
             const usersList = await getAllUsers()
             io.emit('refreshUsers', usersList)
         })
+
+        // socket.on('refreshAllUsers', async() => {
+        //     const usersList = await getAllUsers()
+        //     const currentUser = await getUserInfo(userId)
+        //     io.emit('refreshAllUsers', usersList, currentUser)
+        // })
 
         socket.on('sendRequest', (userId, sender) => {
             let room = clients[userId]

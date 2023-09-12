@@ -36,20 +36,20 @@ const Home = () => {
               </div>
               <div className="patch-notes">
                 <div className="patch-notes-bg"></div>
-                <p><span><GiStabbedNote /></span>Patch notes<span><GiStabbedNote /></span></p>
+                <p><span><GiStabbedNote /></span>Patch notes 1.2<span><GiStabbedNote /></span></p>
                 <div className="notes-container">
                   <p className="note-center">Bug fixed</p>
                   <p>Luffy's fear stays on after the duration expires</p>
                   <p className='note-center'>Buffs</p>
-                  <p>Roronoa Zoro: base attack increased</p>
-                  <p>Megumin: base attack increased</p>
-                  <p>Levi Ackerman: skill damage increased</p>
-                  <p>Orihime: heal value increased</p>
-                  <p>Erwin Smith: attack buff value increased</p>
+                  <p>Naofumi: now can stack resistance on allies</p>
+                  <p>{`Orihime: heal increased 1000 >> 2400`}</p>
+                  <p>{`Yuno: bleed damage increased 800 >> 1200`}</p>
                   <p className="note-center">Nerfs</p>
-                  <p>Luffy: fear duration reduced to 1 round</p>
-                  <p>Megumin: crit damage decreased</p>
-                  <p>Naofumi: resistance buff doesn't apply to himself</p>
+                  <p>Base crit rate decreased for every card</p>
+                  <p>{`Naofumi: resistance buff decreased 200 >> 150`}</p>
+                  <p>{`Erwin: attack buff decreased 500 >> 400`}</p>
+                  <p className="note-center">Adjustments</p>
+                  <p>Kaneki: instead of buffing his attack and crit, heals himself in the changed stance mode</p>
                 </div>
               </div>
             </div>

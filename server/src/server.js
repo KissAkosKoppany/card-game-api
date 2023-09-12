@@ -6,16 +6,16 @@ const io = require('socket.io');
 require('dotenv').config();
 
 const app = require('./app')
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 443;
 
-https.globalAgent.options.rejectUnauthorized = false;
+require('https').globalAgent.options.rejectUnauthorized = false;
 
 const server = https.createServer({
     key: fs.readFileSync('key.pem'),
     cert: fs.readFileSync('cert.pem')
 }, app)
 
-console.log('test 4')
+console.log('test 28')
 
 const socketServer = io(server)
 

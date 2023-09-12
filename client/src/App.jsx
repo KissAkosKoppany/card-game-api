@@ -36,8 +36,7 @@ const App = () => {
   const user = useSelector(state => state.rootReducer.user.currentUser)
 
   useEffect(() => {
-    //need to change this link to backand link
-    const sockett = user ? io('https://www.ascendedcardbattle.com', {
+    const sockett = user ? io('https://ascendedcardbattle.com', {
       auth: {
         token: user.id
       }
@@ -63,7 +62,7 @@ const App = () => {
             <Route path="fight/*" element={<Fight currentUser={user} socket={socket} battleMode={battleMode} setBattleMode={setBattleMode} />} />
             <Route path="cards/*" element={<Cards />} />
             <Route path="leaderboard/*" element={<LeaderBoard socket={socket} />} />
-            <Route path="user-info" element={<ProfileInfo />} />
+            <Route path="user-info" element={<ProfileInfo socket={socket} />} />
             <Route path="admin-page/*" element={<AdminPage />} />
             <Route path="battle-end" element={<BattleEnd setBattleMode={setBattleMode}/>} />
           </Route>

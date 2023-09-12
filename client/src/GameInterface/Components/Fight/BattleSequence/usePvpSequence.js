@@ -57,6 +57,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
                 socket.emit('skillChargeUpdateAtRoundEnd', round, room)
             }
         }
+    // eslint-disable-next-line 
     }, [round, isReferee])
 
     useEffect(() => {
@@ -354,7 +355,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
             effectsHandler(playerEffects, setPlayerEffects, setPlayerCards, setOpponentCards, round)
             effectsHandler(opponentEffects, setOpponentEffects, setOpponentCards, setPlayerCards, round)
         })
-
+        // eslint-disable-next-line 
     }, [socket])
 
     return {
@@ -367,6 +368,5 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
         opponentAnimation,
         round,
         setSequence,
-        sequence,
     }
 }

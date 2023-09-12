@@ -20,7 +20,7 @@ const CardEffectIconsBar = ({ card }) => {
                 : null
         }
         { //crtit buff
-            card.ayanokoujiBuff === true || card.gintokiBuff === true || card.kanekiBuff === true || card.misaBuff === true
+            card.ayanokoujiBuff === true || card.gintokiBuff === true || card.misaBuff === true
                 ? <div className="effect-icon"><GiUpgrade className='effect-sub-icon' /><GiClout className='icon-crit' /></div>
                 : null
         }
@@ -30,14 +30,25 @@ const CardEffectIconsBar = ({ card }) => {
                 : null
         }
         { //attackBuff
-            card.erwinBuff === true || card.gintokiBuff === true || card.kanekiBuff || card.haruhimeBuff === true || card.ichiyaBuff === true || card.misaBuff === true
+            card.erwinBuff === true || card.gintokiBuff === true || card.haruhimeBuff === true || card.ichiyaBuff === true || card.misaBuff === true
                 ? <div className="effect-icon"><GiUpgrade className='effect-sub-icon' />
-                  {
-                    card.damageType === "ad"
-                      ? <GiBroadsword className='icon-attack-ad' />
-                      : <GiLunarWand className='icon-attack-ap' />
-                  }
-                </div>
+                    {
+                        card.damageType === "ad"
+                            ? <GiBroadsword className='icon-attack-ad' />
+                            : <GiLunarWand className='icon-attack-ap' />
+                    }
+                  </div>
+                : null
+        }
+        { //attack deBuff
+            card.sakamotoDeBuff === true
+                ? <div className="effect-icon"><GiUpgrade className='effect-sub-icon down' />
+                    {
+                        card.damageType === "ad"
+                            ? <GiBroadsword className='icon-attack-ad' />
+                            : <GiLunarWand className='icon-attack-ap' />
+                    }
+                  </div>
                 : null
         }
         { //bleed
@@ -71,7 +82,7 @@ const CardEffectIconsBar = ({ card }) => {
                 : null
         }
         { //heal
-            card.asunaHeal === true
+            card.asunaHeal === true || card.kanekiBuff === true
                 ? <div className="effect-icon"><GiHealing className='icon-heal' /></div>
                 : null
         }

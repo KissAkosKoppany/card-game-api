@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 
-import { GiBossKey, GiShurikenAperture, GiSwordsPower, GiWilliamTellSkull, GiChampions } from 'react-icons/gi'
+import { GiBossKey, GiShurikenAperture, GiSwordsPower, GiWilliamTellSkull, GiChampions, GiPencil } from 'react-icons/gi'
+import EditProfile from './Components/EditProfile'
+import { soundEffects } from '../../SoundEffects/soundEffects'
 
-const ProfileDashBoard = ({ currentUser }) => {
+const ProfileDashBoard = ({ currentUser, socket }) => {
+
+    
+    const [showModal, setShowModal] = useState(false)
+    const user = useSelector(state => state.rootReducer.user.currentUser)
 
     function calculateWinrate(battleWon, battlePlayed) {
         if(battleWon === 0) {
@@ -17,9 +24,19 @@ const ProfileDashBoard = ({ currentUser }) => {
 
   return (
     <div className='profile-info-container'>
+            {
+                showModal
+                    ? <EditProfile socket={socket} currentUser={currentUser} setShowModal={setShowModal} />
+                    : null
+            }
             <div className='user-info'>
                 <div className='user-image'>
                     <img alt='profile-avatar' src={currentUser?.image} />
+                    {
+                        currentUser.id === user.id
+                            ? <span onClick={() => {setShowModal(true); soundEffects.accept.play()}}><GiPencil /></span>
+                            : null
+                    }
                 </div>
                 <p>{currentUser?.username}</p>
             </div>
@@ -45,7 +62,7 @@ const ProfileDashBoard = ({ currentUser }) => {
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
   )
 }
 

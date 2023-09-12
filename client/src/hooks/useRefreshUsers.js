@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { setAllUsers } from "../store/user/user.action"
+import { setAllUsers, setCurrentUser } from "../store/user/user.action"
 import { useCallback, useEffect } from "react"
 
 export const useRefreshUsers = (socket) => {
@@ -8,6 +8,10 @@ export const useRefreshUsers = (socket) => {
         if(socket) {
             socket.on('refreshUsers', (users) => {
                 dispach(setAllUsers(users))
+            });
+            socket.on('refreshAllUsers', (allUsers, currentUser) => {
+                dispach(setAllUsers(allUsers))
+                dispach(setCurrentUser(currentUser))
             })
         }
     }, [socket, dispach])

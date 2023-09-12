@@ -9,9 +9,6 @@ const ProfileNav = () => {
 
   const currentUser = useSelector((state) => state.rootReducer.user.currentUser)
 
-  const link = 'https://www.ascendedcardbattle.com'
-  // const link = 'https://localhost:8000'
-
   return (
     <nav className='profile-nav-dropdown'>
       <div className='profile-nav-decor line top'></div>
@@ -36,12 +33,12 @@ const ProfileNav = () => {
               <Link className='link' to="user-info"><li className='profile-nav-link'>Profile info & battle statistics</li></Link>
             </ul>
             <ul className='nav-group-container'>
-            <a className='link' href={`${link}/api/auth/logout`}><li className='profile-nav-link'>Sign Out</li></a>
+            <a className='link' href="https://ascendedcardbattle.com/api/auth/logout"><li className='profile-nav-link'>Sign Out</li></a>
             </ul>
           </>
           :
           <ul className='nav-group-container'>
-            <a className='link' href={`${link}/api/auth/google`}><li className='profile-nav-link'>Sing In</li></a>
+            <a className='link' href="https://ascendedcardbattle.com/api/auth/google"><li className='profile-nav-link'>Sing In</li></a>
           </ul>         
         }
     </nav>

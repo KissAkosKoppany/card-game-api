@@ -1,7 +1,6 @@
 import { soundEffects } from "../SoundEffects/soundEffects"
 
-const API_URL = 'https://www.ascendedcardbattle.com/api';
-// const API_URL = 'https://localhost:8000/api';
+const API_URL = 'https://ascendedcardbattle.com/api';
 
 export async function getUserInfo() {
     try {
@@ -122,5 +121,35 @@ export async function httpUpdateProfileAfterBattle(id, data) {
         })
     } catch(err) {
         console.log('error updating profile after battle', err)
+    }
+}
+
+export async function httpUpdateUsername(id, data) {
+    try {
+        await fetch(`${API_URL}/update-username/${id}`, {
+            method: "post",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+    } catch(err) {
+        soundEffects.fail.play()
+        console.log('error updating username', err)
+    }
+}
+
+export async function httpUpdateProfileImage(id, data) {
+    try {
+        await fetch(`${API_URL}/update-image/${id}`, {
+            method: "post",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+    } catch(err) {
+        soundEffects.fail.play()
+        console.log('error updating username', err)
     }
 }

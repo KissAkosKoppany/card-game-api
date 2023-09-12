@@ -1,6 +1,6 @@
 import { soundEffects } from "../../../../SoundEffects/soundEffects";
 import { delay } from "../BattleSequence/helpers";
-import { critAttack, handleHeal, handleHp, magicDamage, physicalDamage, trueDamage } from "./battleFunctionHelpers";
+import { critAttack, handleHeal, handleHp, magicDamage, physicalDamage, resetAnimation, trueDamage } from "./battleFunctionHelpers";
 
 
 export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, opponentCards, attacker, receiver, round, setBuffs, setOpponentBuffs) => {
@@ -19,10 +19,19 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
             }))
             break;
         case "Minato":
-            setOpponentCards(cards => cards.map(card => {
-                if (card.id === receiver.id) return {...card, stunLength: 3, stunRound: round}
-                    return card
-            }))
+            (async() => {
+                soundEffects.dmgTake.play()
+                setOpponentCards(cards => cards.map(card => {
+                    if (card.id !== receiver.id) return card
+                        else {
+                            let damage = magicDamage(attacker, receiver)
+                            let damageTaken = handleHp(card.hp - (damage * 4));
+                            return {...card, hp: damageTaken, stunLength: 3, stunRound: round, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 4, animation: "dmg-take", attackType: 'ap'}}
+                        } 
+                }))
+                await delay(3500)
+                resetAnimation(setOpponentCards)
+            })()
             break;
         case "Erwin Smith": {
             setBuffs(buffs => {
@@ -32,7 +41,7 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 }}
             })
             const highestAttackCard = playerCards.reduce((prev, current) => (prev.attack > current.attack) ? prev : current)
-            let attackAfterBuff = highestAttackCard.attack + 500
+            let attackAfterBuff = highestAttackCard.attack + 400
             setPlayerCards(cards => 
                 cards.map(card => {
                     if (card.id !== highestAttackCard.id) return card
@@ -42,34 +51,57 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
             }
             break;
         case "Gintoki":
-            setBuffs(buffs => {
-                return {...buffs, gintoki: {
-                    buffRound: round,
-                    buffLength: 4
-                }}
-            })
-            setPlayerCards(cards => cards.map(card => {
-                if (card.name !== "Gintoki") return card
-                    else {
-                        let armor = card.armor - 100
-                        let magicResist = card.magicResist - 100
-                        let attack = card.attack + 400
-                        let critRate = card.critRate + 60
-                        let critDamage = card.critDamage + 100
-                        return {...card, image: "cardImg/gintokiActive.png", armor: armor, magicResist: magicResist, attack: attack, critRate: critRate, critDamage: critDamage, stance: "active", gintokiBuff: true}
-                    }
-            }))
+            (async() => {
+                setBuffs(buffs => {
+                    return {...buffs, gintoki: {
+                        buffRound: round,
+                        buffLength: 4
+                    }}
+                })
+                setPlayerCards(cards => cards.map(card => {
+                    if (card.name !== "Gintoki") return card
+                        else {
+                            let armor = card.armor - 100
+                            let magicResist = card.magicResist - 100
+                            let attack = card.attack + 400
+                            let critRate = card.critRate + 60
+                            let critDamage = card.critDamage + 150
+                            return {...card, image: "cardImg/gintokiActive.png", armor: armor, magicResist: magicResist, attack: attack, critRate: critRate, critDamage: critDamage, stance: "active", gintokiBuff: true}
+                        }
+                }))
+                soundEffects.dmgTake.play()
+                setOpponentCards(cards => cards.map(card => {
+                    if (card.id !== receiver.id) return card
+                        else {
+                            let damage = physicalDamage(attacker, receiver)
+                            let damageTaken = handleHp(card.hp - (3.5 * damage));
+                            return {...card, hp: damageTaken, action: {name: "onDamageReceived", type: 'normalAttack', value: Math.floor(damage * 3.5), animation: "dmg-take", attackType: 'ad'}}
+                        }
+                }))
+                await delay(3500)
+                resetAnimation(setOpponentCards)
+            })()
             break;
         case "Luffy":
-            setBuffs(buffs => {
-                return {...buffs, luffy: {
-                    buffRound: round,
-                    buffLength: 2
-                }}
-            })
-            setOpponentCards(cards => cards.map(card => {
-                return {...card, Luffyfear: true} 
-            }))
+            (async() => {
+                setBuffs(buffs => {
+                    return {...buffs, luffy: {
+                        buffRound: round,
+                        buffLength: 2
+                    }}
+                })
+                soundEffects.dmgTake.play()
+                setOpponentCards(cards => cards.map(card => {
+                    if (card.id !== receiver.id) return {...card, Luffyfear: true}
+                        else {
+                            let damage = physicalDamage(attacker, receiver)
+                            let damageTaken = handleHp(card.hp - (damage * 5))
+                            return {...card, hp: damageTaken, Luffyfear: true, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 5, animation: "dmg-take", attackType: 'ad'}}
+                        }
+                }))
+                await delay(3500)
+                resetAnimation(setOpponentCards)
+            })()
             break;
         case "Megumin":
             (async() => {
@@ -77,18 +109,16 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 setOpponentCards(cards => cards.map(card => {
                     if (card.id === receiver.id) {
                         let damage = magicDamage(attacker, card);
-                        let damageTaken = handleHp(card.hp - (damage * 3));
-                        return {...card, hp: damageTaken, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 3, animation: "dmg-take", attackType: 'ap'}}
+                        let damageTaken = handleHp(card.hp - (damage * 6));
+                        return {...card, hp: damageTaken, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 6, animation: "dmg-take", attackType: 'ap'}}
                     } else {
                         let damage = magicDamage(attacker, card);
-                        let damageTaken = handleHp(card.hp - damage);
-                        return {...card, hp: damageTaken, action: {name: "onDamageReceived", type: 'normalAttack', value: damage, animation: "dmg-take", attackType: 'ap'}}
+                        let damageTaken = handleHp(card.hp - (damage * 3));
+                        return {...card, hp: damageTaken, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 3, animation: "dmg-take", attackType: 'ap'}}
                     }
                 }))
                 await delay(3500)
-                setOpponentCards(cards => cards.map(card => {
-                    return {...card, action: {name: ""}}
-                }))
+                resetAnimation(setOpponentCards)
             })()
             break;
         case "Gasai Yuno":
@@ -119,13 +149,13 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 soundEffects.heal.play()
                 setPlayerCards(cards => cards.map(card => {
                     if (card.name === "Asuna") {
-                        let hpAfterHeal = card.hp + 500;
+                        let hpAfterHeal = card.hp + 800;
                         let healValue = handleHeal(hpAfterHeal, card.maxHp)
-                        return {...card, hp: healValue, theme: "lightblue", image: "cardImg/asunaHealer.png", damageType: "ap", stance: "active", asunaHeal: true, action: {name: "onHealReceived", value: 500, type: "heal"}}
+                        return {...card, hp: healValue, theme: "lightblue", image: "cardImg/asunaHealer.png", damageType: "ap", stance: "active", asunaHeal: true, action: {name: "onHealReceived", value: 800, type: "heal"}}
                     } else {
-                        let hpAfterHeal = card.hp + 500;
+                        let hpAfterHeal = card.hp + 800;
                         let healValue = handleHeal(hpAfterHeal, card.maxHp)
-                        return {...card, hp: healValue, asunaHeal: true, action: {name: "onHealReceived", value: 500, type: "heal"}}
+                        return {...card, hp: healValue, asunaHeal: true, action: {name: "onHealReceived", value: 800, type: "heal"}}
                     }
                 }))
                 setBuffs(buffs => {
@@ -135,33 +165,34 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                     }}
                 })
                 await delay(3500)
-                setPlayerCards(cards => cards.map(card => {
-                    return {...card, action: {name: ""}}
-                }))
+                resetAnimation(setPlayerCards)
             })()
             break;
         case "Kaneki Ken":
-            setPlayerCards(cards => cards.map(card => {
-                if (card.name !== "Kaneki Ken") return card
-                    else {
-                        let attack = card.attack + 200;
-                        let critRate = card.critRate + 50;
-                        let critDamage = card.critDamage + 120;
-                        return {...card, attack: attack, critRate: critRate, critDamage: critDamage, theme: "white", image: "cardImg/kanekiActive.png", stance: "active", kanekiBuff: true}
-                    }
-            }))
-            setOpponentCards(cards => cards.map(card => {
-                return {...card, kanekiPoison: true}
-            }))
-            setBuffs(buffs => {
-                return {...buffs, kaneki: {
-                    buffRound: round,
-                    buffLength: 4
-                }, kanekiPoison: {
-                    poisonRound: round,
-                    poisonLength: 3
-                }}
-            })
+            (async() => {
+                setPlayerCards(cards => cards.map(card => {
+                    if (card.name !== "Kaneki Ken") return card
+                        else {
+                            let hpAfterHeal = card.hp + 400;
+                            let healValue = handleHeal(hpAfterHeal, card.maxHp)
+                            return {...card, hp: healValue, theme: "white", image: "cardImg/kanekiActive.png", stance: "active", kanekiBuff: true, action: {name: "onHealReceived", value: 400, type: "heal"}}
+                        }
+                }))
+                setOpponentCards(cards => cards.map(card => {
+                    return {...card, kanekiPoison: true}
+                }))
+                setBuffs(buffs => {
+                    return {...buffs, kaneki: {
+                        buffRound: round,
+                        buffLength: 4
+                    }, kanekiPoison: {
+                        poisonRound: round,
+                        poisonLength: 3
+                    }}
+                })
+                await delay(3500)
+                resetAnimation(setPlayerCards)
+            })()
             break;
         case "Orihime":
             (async() => {
@@ -170,11 +201,11 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                     if (card.id !== lowestHpCard.id) return card
                         else {
                             soundEffects.heal.play()
-                            let hpAfterHeal = card.hp + 1000
+                            let hpAfterHeal = card.hp + 2400
                             let healValue = handleHeal(hpAfterHeal, card.maxHp)
                             let armor = card.armor + 500
                             let magicResist = card.magicResist + 500
-                            return {...card, hp: healValue, armor: armor, magicResist: magicResist, orihimeBuff: true, action: {name: "onHealReceived", type: "heal", value: 1000}}
+                            return {...card, hp: healValue, armor: armor, magicResist: magicResist, orihimeBuff: true, action: {name: "onHealReceived", type: "heal", value: 2400}}
                         } 
                 }))
                 setBuffs(buffs => {
@@ -194,8 +225,8 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 soundEffects.dmgTake.play()
                 setOpponentCards(cards => cards.map(card => {
                     let damage = physicalDamage(attacker, card)
-                    let hpAfterHit = handleHp(card.hp - (2 * damage))
-                    return {...card, hp: hpAfterHit, action: {name: "onDamageReceived", type: 'normalAttack', value: 2 * damage, animation: "dmg-take", attackType: 'ad'}}
+                    let hpAfterHit = handleHp(card.hp - (3 * damage))
+                    return {...card, hp: hpAfterHit, action: {name: "onDamageReceived", type: 'normalAttack', value: 3 * damage, animation: "dmg-take", attackType: 'ad'}}
                 }))
                 await delay(3500)
                 setOpponentCards(cards => cards.map(card => {
@@ -228,7 +259,8 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                     else {
                         let critRate = card.critRate - 50;
                         let critDamage = card.critDamage - 100;
-                        return {...card, critRate: critRate, critDamage: critDamage, sakamotoDeBuff: true}
+                        let attack = card.attack - 250;
+                        return {...card, attack: attack, critRate: critRate, critDamage: critDamage, sakamotoDeBuff: true}
                     }
             }))
             setBuffs(buffs => {
@@ -247,27 +279,37 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
             }))
             setBuffs(buffs => {
                 return {...buffs, haruhime: {
-                    buffLength: 4,
+                    buffLength: 3,
                     buffRound: round
                 }}
             })
             break;
         case "Sakura":
-            setOpponentCards(cards => cards.map(card => {
-                return {...card, sakuraSilence: true}
-            }))
-            setBuffs(buffs => {
-                return {...buffs, sakura: {
-                    silenceLength: 2,
-                    silenceRound: round
-                }}
-            })
+            (async() => {
+                soundEffects.dmgTake.play()
+                setOpponentCards(cards => cards.map(card => {
+                    if (card.id !== receiver.id) return {...card, sakuraSilence: true}
+                        else {
+                            let damage = physicalDamage(attacker, receiver)
+                            let damageTaken = handleHp(card.hp - (damage * 6))
+                            return {...card, hp: damageTaken, sakuraSilence: true, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 7, animation: "dmg-take", attackType: 'ad'}}
+                        }
+                }))
+                setBuffs(buffs => {
+                    return {...buffs, sakura: {
+                        silenceLength: 2,
+                        silenceRound: round
+                    }}
+                })
+                await delay(3500)
+                resetAnimation(setOpponentCards)
+            })()
             break;
         case "Naofumi":
             setPlayerCards(cards => cards.map(card => {
                 if(card.id !== attacker.id) {
-                    let armor = card.armor + 200;
-                    let magicResist = card.magicResist + 200;
+                    let armor = card.armor + 150;
+                    let magicResist = card.magicResist + 150;
                     return {...card, armor: armor, magicResist: magicResist, naofumiBuff: true}
                 } return card
             }))

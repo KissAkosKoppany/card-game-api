@@ -24,7 +24,7 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
                 cards.map(card => {
                     if (!card.erwinBuff) return card
                     else {
-                        let attackAfterBuffRemoved = card.attack - 300 
+                        let attackAfterBuffRemoved = card.attack - 400
                         return {...card, attack: attackAfterBuffRemoved, erwinBuff: false}
                     }
                 })
@@ -45,7 +45,7 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
                         let magicResist = card.magicResist + 100
                         let attack = card.attack - 400
                         let critRate = card.critRate - 60
-                        let critDamage = card.critDamage - 100
+                        let critDamage = card.critDamage - 150
                         return {...card, image: "cardImg/gintoki.png", armor: armor, magicResist: magicResist, attack: attack, critRate: critRate, critDamage: critDamage, stance: "normal", gintokiBuff: false}
                     }
             }))
@@ -60,9 +60,7 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
         //fearlenght rename
         if (round - buffs.luffy.buffRound === buffs.luffy.buffLength) {
             setOpponentCards(cards => cards.map(card => {
-                if (!card.Luffyfear) return card
                     return {...card, Luffyfear: false}
-                
             }))
             setBuffs(buffs => {
                 const {luffy, ...rest} = buffs;
@@ -78,7 +76,7 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
                     if (!card.yunoBleed) return card
                         else {
                             soundEffects.bleed.play()
-                            let damage = bleedDamage(800, card);
+                            let damage = bleedDamage(1200, card);
                             let damageTaken = handleHp(card.hp - damage);
                             return {...card, hp: damageTaken, action: {animation: "bleed-dmg-take"}}
                         }
@@ -113,7 +111,7 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
         } else {
             setPlayerCards(cards => cards.map(card => {
                 if (card.name !== "Asuna") return {...card, asunaHeal: false}
-                    return {...card, theme: "white", type: "ad", image: "cardImg/asuna.png", stance: "normal", asunaHeal: false}
+                    return {...card, theme: "white", damageType: "ad", image: "cardImg/asuna.png", stance: "normal", asunaHeal: false}
             }))
             setBuffs(buffs => {
                 const {asuna, ...rest} = buffs;
@@ -127,7 +125,7 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
             if(round !== buffs.kanekiPoison.poisonRound) {
                 setOpponentCards(cards => cards.map(card => {
                     soundEffects.poison.play()
-                    let damage = poisonDamage(800, card)
+                    let damage = poisonDamage(900, card)
                     let hpAfterPoisonHit = handleHp(card.hp - damage)
                     return {...card, hp: hpAfterPoisonHit, action: {animation: "poison-dmg-take"}}
                 }))
@@ -153,10 +151,10 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
             setPlayerCards(cards => cards.map(card=> {
                 if (card.name !== "Kaneki Ken") return card
                     else {
-                        let attackAfterBuff = card.attack - 300;
-                        let critRate = card.critRate - 50;
-                        let critDamage = card.critDamage - 120;
-                        return {...card, attack: attackAfterBuff, critRate: critRate, critDamage: critDamage, image: "cardImg/kaneki.png", theme: "black", stance: "normal", kanekiBuff: false}
+                        soundEffects.heal.play()
+                        let hpAfterHeal = card.hp + 400;
+                        let healValue = handleHeal(hpAfterHeal, card.maxHp)
+                        return {...card, hp: healValue, image: "cardImg/kaneki.png", theme: "black", stance: "normal", kanekiBuff: false}
                     }
             }))
             setBuffs(buffs => {
@@ -188,9 +186,10 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
             setOpponentCards(cards => cards.map(card => {
                 if (!card.sakamotoDeBuff) return card
                     else {
+                        let attack = card.attack + 250
                         let critRate = card.critRate + 50
                         let critDamage = card.critDamage + 100
-                        return {...card, critDamage: critDamage, critRate: critRate, sakamotoDeBuff: false}
+                        return {...card, attack: attack, critDamage: critDamage, critRate: critRate, sakamotoDeBuff: false}
                     }
             }))
             setBuffs(buffs => {
@@ -230,8 +229,8 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
     if (buffs.naofumi) {
         if (round - buffs.naofumi.buffRound === buffs.naofumi.buffLength) {
             setPlayerCards(cards => cards.map(card => {
-                let armor = card.armor - 200;
-                let magicResist = card.magicResist - 200;
+                let armor = card.armor - 125;
+                let magicResist = card.magicResist - 125;
                 return {...card, armor: armor, magicResist: magicResist, naofumiBuff: false}
             }))
             setBuffs(buffs => {

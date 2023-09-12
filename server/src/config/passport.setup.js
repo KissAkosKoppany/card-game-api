@@ -35,7 +35,7 @@ async function verifyCallback(accessToken, refreshToken, profile, done) {
             pvpBattlesPlayed: 0,
             pvpBattlesWon: 0,
             pvpPoints: 0,
-            image: profile.photos[0].value,
+            image: "cardImg/saitama.png",
             admin: false,
             isOnline: false
         }).save()

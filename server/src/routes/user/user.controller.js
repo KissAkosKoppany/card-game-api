@@ -54,15 +54,19 @@ async function httpUpdateProfileAfterBattle(req, res) {
 async function httpUpdateUsername(req, res) {
     const id = req.params.id;
     const newUsername = req.body;
-    await updateUsername(id, newUsername)
-    return res.status(201).json(newUsername)
+    try {
+        await updateUsername(id, newUsername.name)
+        return res.status(201).json(newUsername.name)
+    } catch(err) {
+        console.log('error updating username', err)
+    }
 }
 
 async function httpUpdateProfileImage(req, res) {
     const id = req.params.id;
     const newImage = req.body;
-    await updateProfileImage(id, newImage)
-    res.status(201).json(newImage)
+    await updateProfileImage(id, newImage.image)
+    res.status(201).json(newImage.image)
 }
 
 module.exports = {

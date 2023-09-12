@@ -79,7 +79,7 @@ export const poisonDamage = (attack, receiver) => {
 
 export const handleHp = (damageTaken) => {
     if(damageTaken < 0) return 0
-        return damageTaken
+        return Math.floor(damageTaken)
 }
 
 export const handleHeal = (hpAfterHeal, maxHp) => {
@@ -130,5 +130,11 @@ export const updateSkillCharge = (setCards, attacker, value) => {
         if ( card.id === attacker.id) {
             return {...card, skillCharge: value}
         } return card
+    }))
+}
+
+export const resetAnimation = (setCards) => {
+    setCards(cards => cards.map(card => {
+        return {...card, action: {name: ""}}
     }))
 }

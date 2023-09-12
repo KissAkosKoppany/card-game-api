@@ -6,7 +6,7 @@ import ProfileDashBoard from './ProfileDashBoard';
 
 import './ProfileInfo.css'
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ socket }) => {
 
     const currentUser = useSelector((state) => state.rootReducer.user.currentUser)
 
@@ -14,7 +14,7 @@ const ProfileInfo = () => {
     <div className='game-wrapper'>
     <div className="game-body">
       <div className='game-interface'>
-        <ProfileDashBoard currentUser={currentUser} />
+        <ProfileDashBoard currentUser={currentUser} socket={socket} />
       </div>
     </div>
     </div>
