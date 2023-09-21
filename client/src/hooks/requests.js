@@ -1,6 +1,7 @@
 import { soundEffects } from "../SoundEffects/soundEffects"
 
 const API_URL = 'https://ascendedcardbattle.com/api';
+// const API_URL = 'https://localhost:8000/api'
 
 export async function getUserInfo() {
     try {

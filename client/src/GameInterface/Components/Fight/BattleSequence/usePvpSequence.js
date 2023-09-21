@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 
 import { delay, playerChoice } from "./helpers"
 import { soundEffects } from "../../../../SoundEffects/soundEffects"
-import { damageValue, handleHp, handleDamageReceived, skillChargeUpdate, skillChargeUpdateAtRoundEnd, handleNormalAttack, checkCardDeath, updateSkillCharge } from "../BattleFunctions/battleFunctionHelpers"
+import { damageValue, handleHp, handleDamageReceived, skillChargeUpdate, skillChargeUpdateAtRoundEnd, handleNormalAttack, checkCardDeath, updateSkillCharge, checkFallenCards } from "../BattleFunctions/battleFunctionHelpers"
 import { activeSkills } from "../BattleFunctions/activeSkills"
 import { effectsHandler } from "../BattleFunctions/effectsHandler"
 import { useBattleEndHandlerPvP } from "./useBattleEndHandler"
@@ -18,6 +18,8 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
     const [inSequence, setInSequence] = useState(false)
     const [opponentCards, setOpponentCards] = useState(opponentBattleCards)
     const [playerCards, setPlayerCards] = useState(playerBattleCards)
+    const [fallenCards, setFallenCards] = useState([])
+    const [showFallenCards, setShowFallenCards] = useState(false)
     const [round, setRound] = useState(1)
     const [playerEffects, setPlayerEffects] = useState({})
     const [opponentEffects, setOpponentEffects] = useState({})
@@ -41,6 +43,10 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
             effectsHandler(opponentEffects, setOpponentEffects, setOpponentCards, setPlayerCards, round)
             socket.emit('handleEffects', playerEffects, opponentEffects, round, room)
             //card death check
+            // checkFallenCards(playerCards, fallenCards, setFallenCards)
+            // checkFallenCards(opponentCards, fallenCards, setFallenCards)
+            // socket.emit('fallenCardCheck', 0, room)
+            // socket.emit('fallenCardCheck', 1, room)
             checkCardDeath(setPlayerCards)
             checkCardDeath(setOpponentCards)
             socket.emit('cardDeathPlayer', room)
@@ -94,8 +100,8 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
                 const recieverIndex = playerChoice(opponentCards) //rename monster to attack
                 const recieverIndexPlayer = playerChoice(playerCards)
                 
-                const attacker = turn === 0 ? playerCards[index] : opponentCards[index] 
-                const receiver = turn === 0 ? opponentCards[recieverIndex] : playerCards[recieverIndexPlayer] 
+                const attacker = turn === 0 ? playerCards[index] : opponentCards[index]
+                const receiver = turn === 0 ? opponentCards[recieverIndex] : playerCards[recieverIndexPlayer]
     
                 switch(mode) {
                     case "normalAttack": {
@@ -171,10 +177,17 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
                                 : skillChargeUpdate(setPlayerCards, attacker)
 
                             socket.emit('skillChargeUpdate', attacker, turn, room)
+
+                            //death card check and save
+                            // damageTaken === 0
+                                // && checkFallenCards(receiver, fallenCards, setFallenCards)
+
+                            // damageTaken === 0
+                                // && socket.emit('fallenCardCheckNormalAttack', receiver, room)
     
                             await delay(500)
     
-                            //card death check
+                            //filter death cards
                             turn === 1
                                 ? checkCardDeath(setPlayerCards)
                                 : checkCardDeath(setOpponentCards)
@@ -239,8 +252,8 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
                             await delay(4000);
     
                             turn === 0 
-                                ? activeSkills(setPlayerCards, setOpponentCards, playerCards, opponentCards, attacker, receiver, round, setPlayerEffects, setOpponentEffects)
-                                : activeSkills(setOpponentCards, setPlayerCards, opponentCards, playerCards, attacker, receiver, round, setOpponentEffects, setPlayerEffects)
+                                ? activeSkills(setPlayerCards, setOpponentCards, playerCards, opponentCards, attacker, receiver, round, setPlayerEffects, setOpponentEffects, turn, setShowFallenCards)
+                                : activeSkills(setOpponentCards, setPlayerCards, opponentCards, playerCards, attacker, receiver, round, setOpponentEffects, setPlayerEffects, turn, setShowFallenCards)
     
                             socket.emit('activeSkill', playerCards, opponentCards, attacker, receiver, round, turn, room)
                             await delay(1000);
@@ -250,6 +263,11 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
                                 : setOpponentAnimation({ state: false, id: 0, name: "" })
                             
                             socket.emit('animation', { state: false, id: 0, name: "" }, turn, room)
+
+                            // checkFallenCards(playerCards, fallenCards, setFallenCards)
+                            // checkFallenCards(opponentCards, fallenCards, setFallenCards)
+                            // socket.emit('fallenCardCheck', 0, room)
+                            // socket.emit('fallenCardCheck', 1, room)
     
                             await delay(2000)
     
@@ -262,6 +280,7 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
                             setRound(round => turn === 0 ? round : round + 1)
                             socket.emit('round', round, room)
                             await delay(1000)
+
                             setTurn(turn === 0 ? 1 : 0)
                             socket.emit('changeTurn', turn, room)
                             setInSequence(false)
@@ -319,6 +338,10 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
             
         })
 
+        socket.on('checkFallenCardNormalAttack', receiver => {
+            checkFallenCards(receiver, fallenCards, setFallenCards)
+        })
+
         socket.on('checkCardDeath', (turn) => {
             turn === 1
                 ? checkCardDeath(setPlayerCards)
@@ -347,8 +370,8 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
 
         socket.on('handleActiveSkill', (playerCards, opponentCards, attacker, receiver, round, turn) => {
             turn === 0 
-                ? activeSkills(setPlayerCards, setOpponentCards, playerCards, opponentCards, attacker, receiver, round, setPlayerEffects, setOpponentEffects)
-                : activeSkills(setOpponentCards, setPlayerCards, opponentCards, playerCards, attacker, receiver, round, setOpponentEffects, setPlayerEffects) 
+                ? activeSkills(setPlayerCards, setOpponentCards, playerCards, opponentCards, attacker, receiver, round, setPlayerEffects, setOpponentEffects, turn, setShowFallenCards)
+                : activeSkills(setOpponentCards, setPlayerCards, opponentCards, playerCards, attacker, receiver, round, setOpponentEffects, setPlayerEffects, turn, setShowFallenCards) 
         })
 
         socket.on('setEffects', (playerEffects, opponentEffects, round) => {
@@ -368,5 +391,10 @@ export const usePvpSequence = (room, socket, isReferee, setBattleMode, userId, p
         opponentAnimation,
         round,
         setSequence,
+        fallenCards,
+        setShowFallenCards,
+        showFallenCards,
+        setPlayerCards,
+        setOpponentCards
     }
 }

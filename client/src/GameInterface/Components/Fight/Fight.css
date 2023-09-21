@@ -10,6 +10,18 @@
     z-index: 999;
 }
 
+.fallen-cards-container {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    padding: var(--spacer-300);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    z-index: 99999;
+    background-color: rgba(var(--clr-bg-main), .97);
+}
+
 .opponent-cards-container,
 .player-cards-container {
     display: flex;
@@ -100,3 +112,4 @@
 .turn-indicator::after {
     filter: blur(2px);
 }
+

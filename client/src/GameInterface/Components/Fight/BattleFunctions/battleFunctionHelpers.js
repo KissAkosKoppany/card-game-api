@@ -115,6 +115,11 @@ export const checkCardDeath = (setCards) => {
     setCards(cards => cards.filter(card => card.hp > 0))
 }
 
+export const checkFallenCards = (card, fallenCards, setFallenCards) => {
+    // console.log('dead card', card)
+    setFallenCards([...fallenCards, card])
+}
+
 export const skillChargeUpdateAtRoundEnd = (setCards, round) => {
     setCards(cards => cards.map(card => {
         if (card?.skillCharge === card?.skillCount || card?.stance === "active" || card.Luffyfear === true || card.titanFear === true || round - card?.stunRound < card?.stunLength) return card

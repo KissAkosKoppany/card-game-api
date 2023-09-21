@@ -1,6 +1,6 @@
 import { soundEffects } from "../../../../SoundEffects/soundEffects";
 import { delay } from "../BattleSequence/helpers";
-import { bleedDamage, handleHeal, handleHp, poisonDamage } from "./battleFunctionHelpers";
+import { bleedDamage, handleHeal, handleHp, poisonDamage, resetAnimation } from "./battleFunctionHelpers";
 
 export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponentCards, round) => {
 
@@ -103,7 +103,7 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
             if(round !== buffs.asuna.buffRound) {
                 setPlayerCards(cards => cards.map(card => {
                     soundEffects.heal.play()
-                    let hpAfterHeal = card.hp + 500;
+                    let hpAfterHeal = card.hp + 300;
                     let healValue = handleHeal(hpAfterHeal, card.maxHp)
                     return {...card, hp: healValue}
                 }))
@@ -199,16 +199,28 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
         }
     }
 
-    if (buffs.haruhime) {
-        if (round - buffs.haruhime.buffRound === buffs.haruhime.buffLength) {
+    if (buffs.haruhimeRes) {
+        if (round - buffs.haruhimeRes.buffRound === buffs.haruhimeRes.buffLength) {
             setPlayerCards(cards => cards.map(card => {
-                let attack = card.attack - 200;
                 let armor = card.armor - 100;
                 let magicResist = card.magicResist - 100;
-                return {...card, attack: attack, magicResist: magicResist, armor: armor, haruhimeBuff: false}
+                return {...card, magicResist: magicResist, armor: armor, haruhimeRes: false}
             }))
             setBuffs(buffs => {
-                const {haruhime, ...rest} = buffs;
+                const {haruhimeRes, ...rest} = buffs;
+                return rest
+            })
+        }
+    }
+
+    if (buffs.harhimeAttack) {
+        if (round - buffs.harhimeAttack.buffRound === buffs.harhimeAttack.buffLength) {
+            setPlayerCards(cards => cards.map(card => {
+                let attack = card.attack - 200;
+                return {...card, attack: attack, haruhimeAttack: false}
+            }))
+            setBuffs(buffs => {
+                const {harhimeAttack, ...rest} = buffs;
                 return rest
             })
         }
@@ -253,6 +265,35 @@ export const effectsHandler = async(buffs, setBuffs, setPlayerCards, setOpponent
             })
         }
     }
+
+    if (buffs.natsu) {
+        if (round - buffs.natsu.burnRound < buffs.natsu.burnLength) {
+            if(round !== buffs.natsu.burnRound) {      
+                setOpponentCards(cards => cards.map(card => {
+                    if (!card.natsuBurn) return card
+                        else {
+                            soundEffects.burn.play()
+                            let damage = 700;
+                            let damageTaken = handleHp(card.hp - damage);
+                            return {...card, hp: damageTaken, action: {animation: "burn-dmg-take"}}
+                        }
+                }))
+                await delay(1500)
+                resetAnimation(setOpponentCards)
+            }
+        } else {
+            setOpponentCards(cards => cards.map(card => {
+                if (!card.natsuBurn) return card
+                    return {...card, natsuBurn: false}
+            }))
+            setBuffs(buffs => {
+                const {natsu, ...rest} = buffs;
+                return rest;
+            })
+        }
+    }
+
+    //boss effects START
 
     if (buffs.kurama) {
         if (round - buffs.kurama.burnRound < buffs.kurama.burnLength) {

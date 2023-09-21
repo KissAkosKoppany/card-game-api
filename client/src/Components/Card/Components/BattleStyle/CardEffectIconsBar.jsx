@@ -30,7 +30,7 @@ const CardEffectIconsBar = ({ card }) => {
                 : null
         }
         { //attackBuff
-            card.erwinBuff === true || card.gintokiBuff === true || card.haruhimeBuff === true || card.ichiyaBuff === true || card.misaBuff === true
+            card.erwinBuff === true || card.gintokiBuff === true || card.haruhimeAttack === true || card.ichiyaBuff === true || card.misaBuff === true
                 ? <div className="effect-icon"><GiUpgrade className='effect-sub-icon' />
                     {
                         card.damageType === "ad"
@@ -67,17 +67,17 @@ const CardEffectIconsBar = ({ card }) => {
                 : null
         }
         { //armor buff
-            card.orihimeBuff === true || card.haruhimeBuff === true || card.naofumiBuff === true
+            card.orihimeBuff === true || card.haruhimeRes === true || card.naofumiBuff === true
                 ? <div className="effect-icon"><GiUpgrade className='effect-sub-icon' /><GiAbdominalArmor className='icon-armor' /></div>
                 : null
         }
         { //magicResist buff
-            card.orihimeBuff === true || card.haruhimeBuff === true || card.naofumiBuff === true
+            card.orihimeBuff === true || card.haruhimeRes === true || card.naofumiBuff === true
                 ? <div className="effect-icon"><GiUpgrade className='effect-sub-icon' /><GiMagicShield className='icon-magicResist' /></div>
                 : null
         }
         { //burn
-            card.kuramaBurn === true
+            card.kuramaBurn === true || card.natsuBurn === true
                 ? <div className="effect-icon"><GiSmallFire className='icon-burn' /></div>
                 : null
         }

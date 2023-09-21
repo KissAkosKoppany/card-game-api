@@ -94,6 +94,10 @@ function listen(io) {
             socket.to(room).emit('setSkillChargeUpdate', attacker, turn)
         })
 
+        socket.on('fallenCardCheckNormalAttack', (receiver, room) => {
+            socket.to(room).emit('checkFallenCardNormalAttack', receiver)
+        })
+
         socket.on('cardDeathCheck', (turn, room) => {
             socket.to(room).emit('checkCardDeath', turn)
         })

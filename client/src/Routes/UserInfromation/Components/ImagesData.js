@@ -98,4 +98,10 @@ export const imagesData = [
     {
         src: 'cardImg/zoro.png',
     },
+    {
+        src: 'cardImg/asta.png'
+    },
+    {
+        src: 'cardImg/natsu.png'
+    }
 ]

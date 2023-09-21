@@ -19,7 +19,7 @@ const Home = () => {
                 <div className="patch-notes-bg"></div>
                 <p><span><GiNewspaper /></span>News<span><GiNewspaper /></span></p>
                 <div className="notes-container">
-                  <p>New stages available</p>
+                  <p>2 new cards: Asta, Natsu</p>
                   <p>3 new Boss cards</p>
                   <p>New game mode: PvP</p>
                   <p className="note-center">PvP info</p>
@@ -36,10 +36,11 @@ const Home = () => {
               </div>
               <div className="patch-notes">
                 <div className="patch-notes-bg"></div>
-                <p><span><GiStabbedNote /></span>Patch notes 1.2<span><GiStabbedNote /></span></p>
+                <p><span><GiStabbedNote /></span>Patch notes 1.3<span><GiStabbedNote /></span></p>
                 <div className="notes-container">
                   <p className="note-center">Bug fixed</p>
-                  <p>Luffy's fear stays on after the duration expires</p>
+                  <p>Buff efect stays on after the duration expires</p>
+                  <p>Stun and silence stayed on longer for one side.</p>
                   <p className='note-center'>Buffs</p>
                   <p>Naofumi: now can stack resistance on allies</p>
                   <p>{`Orihime: heal increased 1000 >> 2400`}</p>
@@ -48,8 +49,10 @@ const Home = () => {
                   <p>Base crit rate decreased for every card</p>
                   <p>{`Naofumi: resistance buff decreased 200 >> 150`}</p>
                   <p>{`Erwin: attack buff decreased 500 >> 400`}</p>
+                  <p>{`Asuna: heal decreased 800 >> 600, end of round heal 500 >> 300`}</p>
                   <p className="note-center">Adjustments</p>
                   <p>Kaneki: instead of buffing his attack and crit, heals himself in the changed stance mode</p>
+                  <p>Aqua: the active skill now heals also</p>
                 </div>
               </div>
             </div>

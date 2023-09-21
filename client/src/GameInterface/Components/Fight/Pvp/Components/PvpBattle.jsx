@@ -35,6 +35,11 @@ const PvpBattle = ({ socket, setBattleMode }) => {
         opponentAnimation,
         round,
         setSequence,
+        fallenCards,
+        showFallenCards,
+        setShowFallenCards,
+        setPlayerCards,
+        setOpponentCards
     } = usePvpSequence(room, socket, isReferee, setBattleMode, currentUser.id, currentUser.pvpPoints)
 
     const handleSetSequence = (mode, index, card) => {
@@ -51,11 +56,36 @@ const PvpBattle = ({ socket, setBattleMode }) => {
           socket.emit('opponentSetSequence', turn, mode, index, room)
         }
       }
+
+      const handleCardSelectSkill = (card) => {
+        if(turn === 0) {
+          setPlayerCards([...playerCards, card])
+          setShowFallenCards(false)
+        } else {
+          setOpponentCards([...opponentCards, card])
+          setShowFallenCards(false)
+        }
+      }
+
+      // console.log("fallen cards", fallenCards)
     
 
   return (
     <div className='battle-container'>
       <div className="battle-bg-decor"></div>
+        {
+          showFallenCards && fallenCards.length
+            ? <div className='fallen-cards-container'>
+              {
+                fallenCards.map(card => (
+                  <div onClick={() => handleCardSelectSkill(card)} key={card?.id} className="card-select">
+                    <Card card={card} cardStyle="select" />
+                  </div>
+                ))
+              }
+              </div>
+            : null
+        }
       <div className={`opponent-cards-container ${turn === 1 ? "turn-indicator" : ""}`}>
         {
           opponentCards.map((card, i) => (

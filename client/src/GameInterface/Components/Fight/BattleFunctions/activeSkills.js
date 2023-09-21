@@ -3,7 +3,7 @@ import { delay } from "../BattleSequence/helpers";
 import { critAttack, handleHeal, handleHp, magicDamage, physicalDamage, resetAnimation, trueDamage } from "./battleFunctionHelpers";
 
 
-export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, opponentCards, attacker, receiver, round, setBuffs, setOpponentBuffs) => {
+export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, opponentCards, attacker, receiver, round, setBuffs, setOpponentBuffs, turn, setShowFallenCards) => {
     switch(attacker.name) {
         case "Ayanokouji":
             setBuffs(buffs => {
@@ -24,9 +24,11 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 setOpponentCards(cards => cards.map(card => {
                     if (card.id !== receiver.id) return card
                         else {
+                            let stunLength = turn === 0 ? 2 : 3;
+                            console.log('stunlength', stunLength)
                             let damage = magicDamage(attacker, receiver)
                             let damageTaken = handleHp(card.hp - (damage * 4));
-                            return {...card, hp: damageTaken, stunLength: 3, stunRound: round, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 4, animation: "dmg-take", attackType: 'ap'}}
+                            return {...card, hp: damageTaken, stunLength: stunLength, stunRound: round, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 4, animation: "dmg-take", attackType: 'ap'}}
                         } 
                 }))
                 await delay(3500)
@@ -85,9 +87,10 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
         case "Luffy":
             (async() => {
                 setBuffs(buffs => {
+                    let buffLength = turn === 0 ? 1 : 2;
                     return {...buffs, luffy: {
                         buffRound: round,
-                        buffLength: 2
+                        buffLength: buffLength
                     }}
                 })
                 soundEffects.dmgTake.play()
@@ -109,12 +112,12 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 setOpponentCards(cards => cards.map(card => {
                     if (card.id === receiver.id) {
                         let damage = magicDamage(attacker, card);
-                        let damageTaken = handleHp(card.hp - (damage * 6));
-                        return {...card, hp: damageTaken, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 6, animation: "dmg-take", attackType: 'ap'}}
+                        let damageTaken = handleHp(card.hp - (damage * 5));
+                        return {...card, hp: damageTaken, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 5, animation: "dmg-take", attackType: 'ap'}}
                     } else {
                         let damage = magicDamage(attacker, card);
-                        let damageTaken = handleHp(card.hp - (damage * 3));
-                        return {...card, hp: damageTaken, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 3, animation: "dmg-take", attackType: 'ap'}}
+                        let damageTaken = handleHp(card.hp - (damage * 2));
+                        return {...card, hp: damageTaken, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 2, animation: "dmg-take", attackType: 'ap'}}
                     }
                 }))
                 await delay(3500)
@@ -149,13 +152,13 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 soundEffects.heal.play()
                 setPlayerCards(cards => cards.map(card => {
                     if (card.name === "Asuna") {
-                        let hpAfterHeal = card.hp + 800;
+                        let hpAfterHeal = card.hp + 600;
                         let healValue = handleHeal(hpAfterHeal, card.maxHp)
-                        return {...card, hp: healValue, theme: "lightblue", image: "cardImg/asunaHealer.png", damageType: "ap", stance: "active", asunaHeal: true, action: {name: "onHealReceived", value: 800, type: "heal"}}
+                        return {...card, hp: healValue, theme: "lightblue", image: "cardImg/asunaHealer.png", damageType: "ap", stance: "active", asunaHeal: true, action: {name: "onHealReceived", value: 600, type: "heal"}}
                     } else {
-                        let hpAfterHeal = card.hp + 800;
+                        let hpAfterHeal = card.hp + 600;
                         let healValue = handleHeal(hpAfterHeal, card.maxHp)
-                        return {...card, hp: healValue, asunaHeal: true, action: {name: "onHealReceived", value: 800, type: "heal"}}
+                        return {...card, hp: healValue, asunaHeal: true, action: {name: "onHealReceived", value: 600, type: "heal"}}
                     }
                 }))
                 setBuffs(buffs => {
@@ -187,7 +190,7 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                         buffLength: 4
                     }, kanekiPoison: {
                         poisonRound: round,
-                        poisonLength: 3
+                        poisonLength: 4
                     }}
                 })
                 await delay(3500)
@@ -209,8 +212,9 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                         } 
                 }))
                 setBuffs(buffs => {
+                    let buffLength = turn === 0 ? 2 : 3;
                     return {...buffs, orihime: {
-                        buffLength: 3,
+                        buffLength: buffLength,
                         buffRound: round
                     }}
                 })
@@ -225,8 +229,8 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 soundEffects.dmgTake.play()
                 setOpponentCards(cards => cards.map(card => {
                     let damage = physicalDamage(attacker, card)
-                    let hpAfterHit = handleHp(card.hp - (3 * damage))
-                    return {...card, hp: hpAfterHit, action: {name: "onDamageReceived", type: 'normalAttack', value: 3 * damage, animation: "dmg-take", attackType: 'ad'}}
+                    let hpAfterHit = handleHp(card.hp - (2.3 * damage))
+                    return {...card, hp: hpAfterHit, action: {name: "onDamageReceived", type: 'normalAttack', value: Math.floor(2.3 * damage), animation: "dmg-take", attackType: 'ad'}}
                 }))
                 await delay(3500)
                 setOpponentCards(cards => cards.map(card => {
@@ -264,8 +268,9 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                     }
             }))
             setBuffs(buffs => {
+                let buffLength = turn === 0 ? 2 : 3;
                 return {...buffs, sakamoto: {
-                    buffLength: 3,
+                    buffLength: buffLength,
                     buffRound: round 
                 }}
             })
@@ -275,10 +280,14 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 let attack = card.attack + 200;
                 let armor = card.armor + 100;
                 let magicResist = card.magicResist + 100;
-                return {...card, attack: attack, armor: armor, magicResist: magicResist, haruhimeBuff: true}
+                return {...card, attack: attack, armor: armor, magicResist: magicResist, haruhimeAttack: true, haruhimeRes: true}
             }))
             setBuffs(buffs => {
-                return {...buffs, haruhime: {
+                let buffLength = turn === 0 ? 2 : 3;
+                return {...buffs, haruhimeRes: {
+                    buffLength: buffLength,
+                    buffRound: round
+                }, harhimeAttack: {
                     buffLength: 3,
                     buffRound: round
                 }}
@@ -292,12 +301,14 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                         else {
                             let damage = physicalDamage(attacker, receiver)
                             let damageTaken = handleHp(card.hp - (damage * 6))
-                            return {...card, hp: damageTaken, sakuraSilence: true, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 7, animation: "dmg-take", attackType: 'ad'}}
+                            return {...card, hp: damageTaken, sakuraSilence: true, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 6, animation: "dmg-take", attackType: 'ad'}}
                         }
                 }))
                 setBuffs(buffs => {
+                    let silenceLength = turn === 0 ? 1 : 2;
+                    console.log("silencelength", silenceLength)
                     return {...buffs, sakura: {
-                        silenceLength: 2,
+                        silenceLength: silenceLength,
                         silenceRound: round
                     }}
                 })
@@ -314,8 +325,9 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
                 } return card
             }))
             setBuffs(buffs => {
+                let buffLength = turn === 0 ? 2 : 3;
                 return {...buffs, naofumi: {
-                    buffLength: 3,
+                    buffLength: buffLength,
                     buffRound: round
                 }}
             })
@@ -338,13 +350,68 @@ export const activeSkills = (setPlayerCards, setOpponentCards, playerCards, oppo
             })
             break;
         case "Aqua":
-            setPlayerCards(cards => cards.map(card => {
-              return {...card, Luffyfear: false, yunoBleed: false, sakuraSilence: false, kanekiPoison: false, saikenPoison: false, kuramaBurn: false, ryukSilence: false, titanFear: false, titanBleed: false, zerefPoison: false}  
-            }))
-            setOpponentBuffs(buffs => {
-                const {luffy, yuno, sakura, kanekiPoison, kurama, saiken, ryuk, titanOne, titanTwo, zeref, ...rest} = buffs;
-                return rest
-            })
+            (async() => {
+                const lowestHpCard = playerCards.reduce((prev, current) => (prev.hp < current.hp) ? prev : current)
+                setPlayerCards(cards => cards.map(card => {
+                    if(card.id === lowestHpCard.id) {
+                        soundEffects.heal.play()
+                        let hpAfterHeal = card.hp + 800;
+                        let healValue = handleHeal(hpAfterHeal, card.maxHp)
+                        return {...card, hp: healValue, action: {name: "onHealReceived", type: "heal", value: 800}, natsuBurn: false, Luffyfear: false, yunoBleed: false, sakuraSilence: false, kanekiPoison: false, saikenPoison: false, kuramaBurn: false, ryukSilence: false, titanFear: false, titanBleed: false, zerefPoison: false}
+                    } else {
+                        let hpAfterHeal = card.hp + 500;
+                        let healValue = handleHeal(hpAfterHeal, card.maxHp)
+                        return {...card, hp: healValue, action: {name: "onHealReceived", type: "heal", value: 500}, natsuBurn: false, Luffyfear: false, yunoBleed: false, sakuraSilence: false, kanekiPoison: false, saikenPoison: false, kuramaBurn: false, ryukSilence: false, titanFear: false, titanBleed: false, zerefPoison: false} 
+                    }
+                }))
+                setOpponentBuffs(buffs => {
+                    const {luffy, yuno, sakura, kanekiPoison, kurama, saiken, ryuk, titanOne, titanTwo, zeref, natsu, ...rest} = buffs;
+                    return rest
+                })
+                await delay(3500)
+                resetAnimation(setPlayerCards)
+            })()
+            break;
+        case "Natsu":
+            (async() => {
+                soundEffects.dmgTake.play()
+                const lowestHpCard = opponentCards.reduce((prev, current) => (prev.hp < current.hp) ? prev : current)
+                setOpponentCards(cards => cards.map(card => {
+                    if(card.id === lowestHpCard.id) {
+                        let damage = magicDamage(attacker, lowestHpCard)
+                        let damageTaken = handleHp(card.hp - (damage * 4))
+                        return {...card, hp: damageTaken, natsuBurn: true, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 4, animation: "dmg-take", attackType: 'ap'}}
+                    } else return card
+                }))
+                setBuffs(buffs => {
+                    return {...buffs, natsu: {
+                        burnLength: 3,
+                        burnRound: round
+                    }}
+                })
+                await delay(3500)
+                resetAnimation(setOpponentCards)
+            })()
+            break;
+        case "Asta":
+            (async() => {
+                soundEffects.dmgTake.play()
+                setOpponentCards(cards => cards.map(card => {
+                    if(card.id === receiver.id) {
+                        let damage = physicalDamage(attacker, receiver)
+                        let damageTaken = handleHp(card.hp - (damage * 5))
+                        return {...card, skillCharge: 0, hp: damageTaken, action: {name: "onDamageReceived", type: 'normalAttack', value: damage * 5, animation: "dmg-take", attackType: 'ad'}}
+                    } else {
+                        let deBuffValue = turn === 0 ? 1 : 2;
+                        let skillCharge = card.skillCharge === 0 ? 0 : card.skillCharge - deBuffValue;
+                        return {...card, skillCharge: skillCharge}
+                    }
+                }))
+                await delay(3500)
+                resetAnimation(setOpponentCards)
+            })()
+        case "Orochimaru":
+            setShowFallenCards(true)
             break;
         default:
             console.log("active default")
